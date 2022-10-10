@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.gradebook.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.HelloController">
+   <children>
+      <Button layoutX="17.0" layoutY="127.0" mnemonicParsing="false" onAction="#onClickBtnLogin" text="Login" />
+      <Label layoutX="25.0" layoutY="51.0" text="Login" />
+      <Label layoutX="26.0" layoutY="86.0" text="Hasło" />
+      <PasswordField fx:id="passwordText" layoutX="84.0" layoutY="82.0" />
+      <TextField fx:id="loginText" layoutX="84.0" layoutY="47.0" />
+      <Button fx:id="btnRegister" layoutX="84.0" layoutY="127.0" mnemonicParsing="false" onAction="#onClickBtnRegister" text="Rejestracja" />
+      <Label fx:id="labelRemind" layoutX="178.0" layoutY="132.0" text="Przypomnij hasło">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
