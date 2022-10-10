@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.RegisterView">
     <Label layoutX="25.0" layoutY="51.0" text="Podaj login" />
@@ -12,4 +13,8 @@
     <TextField fx:id="loginText" layoutX="111.0" layoutY="47.0" />
     <Button layoutX="39.0" layoutY="160.0" mnemonicParsing="false" onAction="#onClickBtnRegister" text="Zarejestruj" />
     <Button fx:id="closeButton" layoutX="173.0" layoutY="160.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Anuluj" />
+    <Label fx:id="errorMsg" disable="true" layoutX="25.0" layoutY="14.0" textFill="RED" visible="false">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
 </Pane>
