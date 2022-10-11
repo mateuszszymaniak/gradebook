@@ -9,6 +9,9 @@ module com.example.gradebook {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires org.hibernate.orm.core;
+    requires jakarta.persistence;
+    requires java.naming;
 
     opens com.example.gradebook to javafx.fxml;
     exports com.example.gradebook;
