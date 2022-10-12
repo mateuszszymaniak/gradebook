@@ -28,7 +28,7 @@ public class DBTransaction extends DB {
     }
 
     public boolean signIn(String login, String password) {
-        List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "' AND password LIKE '" + password +"'");
+        List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "' AND password LIKE '" + password + "'");
         if(list.isEmpty()){
             return false;
         }

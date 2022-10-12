@@ -9,8 +9,9 @@ public class DB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/gradebook";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
-    private static final String[] tables = {"users"};
-    private static final String[] fieldsCreationFormula = {"(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))"};
+    private static final String[] tables = {"users","students"};
+    private static final String[] fieldsCreationFormula = {"(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))",
+            "(id INTEGER AUTO_INCREMENT, surname VARCHAR(50), name VARCHAR(45), studentGroup VARCHAR(5), schoolYear VARCHAR(9), PRIMARY KEY (id))"};
     protected Connection connection;
     protected Statement statement;
 
@@ -30,7 +31,7 @@ public class DB {
                 }
             }
             else {
-                throw new Exception("Initial tables in DB class error");
+                throw new Exception("Initial tables in DB class error: tables lengths are not the same");
             }
         } catch (SQLException ex) {
             System.err.println("Problem opening connection");
