@@ -10,11 +10,12 @@
         <property
                 name="hibernate.connection.username">root</property>
         <property
-                name="hibernate.connection.password"/>
+                name="hibernate.connection.password"></property>
         <property name="hibernate.show_sql">true</property>
         <property
                 name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 <!--        <mapping class="Student" />-->
-        <mapping class="User" />
+        <mapping resource="user.hbm.xml" />
+<!--        <mapping class="User" />-->
     </session-factory>
 </hibernate-configuration>

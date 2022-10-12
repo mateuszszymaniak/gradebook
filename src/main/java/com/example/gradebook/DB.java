@@ -1,9 +1,16 @@
 package com.example.gradebook;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 public class DB {
-    private Session session;
+    //private Session session;
 
 //    private String creationString = "CREATE TABLE students (" +
 //            "id int(4), " +
@@ -13,12 +20,40 @@ public class DB {
 //            ");";
 //    private boolean success = false;
 
-    public DB() {
+    /*public DB() {
         this.session = HibernateFactory.getSessionFactory().openSession();
     }
 
     public Session getSession() {
         return this.session;
+    }*/
+
+    public static void main() {
+//        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+//        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+//        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        SessionFactory factory = HibernateFactory.getSessionFactory();
+//        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class) .buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+
+        try {
+            //User usr = new User(2, "admin", "zaq1@WSX");
+            User usr = new User();
+            usr.setId(2);
+            usr.setLogin("admin1");
+            usr.setPassword("zaq1@WSX");
+            session.persist(usr);
+            t.commit();
+            System.out.println("successfully saved");
+
+        }catch (Exception e){
+            System.out.println(e);
+
+        }
+
+        factory.close();
+        session.close();
     }
 
     /*

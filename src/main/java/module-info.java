@@ -12,6 +12,7 @@ module com.example.gradebook {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;
+    requires org.mapstruct.processor;
 
     opens com.example.gradebook to javafx.fxml;
     exports com.example.gradebook;
