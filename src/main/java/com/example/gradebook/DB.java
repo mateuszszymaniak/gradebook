@@ -9,6 +9,8 @@ public class DB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/gradebook";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
+    private static final String[] tables = {"users"};
+    private static final String[] fieldsCreationFormula = {"(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))"};
     private Connection connection;
     private Statement statement;
 
@@ -22,16 +24,26 @@ public class DB {
         try {
             connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             statement = connection.createStatement();
-            createTable();
+            if (tables.length == fieldsCreationFormula.length) {
+                for (int i=0; i<tables.length; i++) {
+                    createTable(i);
+                }
+            }
+            else {
+                throw new Exception("Initial tables in DB class error");
+            }
         } catch (SQLException ex) {
             System.err.println("Problem opening connection");
             ex.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unknown error");
+            e.printStackTrace();
         }
     }
 
-    public boolean createTable() {
-        String create = "CREATE TABLE IF NOT EXISTS users" +
-                "(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))";
+    public boolean createTable(int i) {
+        String create = "CREATE TABLE IF NOT EXISTS " + tables[i] +
+                " " + fieldsCreationFormula[i];
         try {
             statement.execute(create);
         } catch (SQLException e) {
