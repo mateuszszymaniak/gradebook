@@ -27,10 +27,20 @@ public class DBTransaction extends DB {
         }
     }
 
-    private List<User> getUsers() {
+    private List<User> getUsers(int id) {
+        if (id==0){
+            return getUsers_mechanism("SELECT * FROM users");
+
+        }
+        else {
+            return getUsers_mechanism("SELECT * FROM users WHERE id=" + id);
+        }
+    }
+
+    private List<User> getUsers_mechanism(String sqlQuery) {
         List<User> output = new LinkedList<User>();
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
             int id;
             String login, password;
             while (resultSet.next()) {
@@ -48,8 +58,8 @@ public class DBTransaction extends DB {
         return output;
     }
 
-    public void printUsers() {
-        List<User> list = getUsers();
+    public void printUsers(int userId) {
+        List<User> list = getUsers(userId);
         for (User usr : list) {
             System.out.println(usr.getId() + " " + usr.getLogin() + " " + usr.getPassword());
         }
