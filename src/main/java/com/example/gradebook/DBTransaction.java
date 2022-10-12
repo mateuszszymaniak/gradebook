@@ -14,17 +14,24 @@ public class DBTransaction extends DB {
          */
     }
 
-    public void registerUser(String login, String password) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
-                    "users (`id`,`login`,`password`) VALUES (null,?,?)");
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            System.err.println("Error while inserting user data: " + login);
-            e.printStackTrace();
+    public boolean registerUser(String login, String password) {
+        if (signIn(login, password)) {
+            return false;
         }
+        else {
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
+                        "users (`id`,`login`,`password`) VALUES (null,?,?)");
+                preparedStatement.setString(1, login);
+                preparedStatement.setString(2, password);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                System.err.println("Error while inserting user data: " + login);
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean signIn(String login, String password) {
