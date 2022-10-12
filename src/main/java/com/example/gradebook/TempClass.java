@@ -14,6 +14,6 @@ public class TempClass {
         for (User usr : list) {
             System.out.println(usr.getId() + " " + usr.getLogin() + " " + usr.getPassword());
         }
-        db.closeConnetion();
+        db.closeConnection();
     }
 }
