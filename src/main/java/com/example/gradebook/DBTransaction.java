@@ -14,6 +14,10 @@ public class DBTransaction extends DB {
          */
     }
 
+
+    // ----------------------
+    // User class
+    // ----------------------
     public boolean registerUser(String login, String password) {
         if (signIn(login, password)) {
             return false;
@@ -81,6 +85,58 @@ public class DBTransaction extends DB {
             System.out.println(usr.getId() + " " + usr.getLogin() + " " + usr.getPassword());
         }
     }
+
+    // ----------------------
+    // Student class
+    // ----------------------
+    public boolean addStudent(String surname, String name, String studentGroup, String schoolYear) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
+                    "students (`id`,`surname`,`name`,`studentGroup`,`schoolYear`) VALUES (null,?,?,?,?)");
+            preparedStatement.setString(1, surname);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, studentGroup);
+            preparedStatement.setString(4, schoolYear);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.err.println("Error while inserting student data: " + surname + " " + name);
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public void printStudents() {
+        List<Student> list = getStudents_mechanism("SELECT * FROM students");
+        for (Student stud : list) {
+            System.out.println(stud.getId() + " " + stud.getName() + " " + stud.getSurname() + " " + stud.getStudentGroup() + " " + stud.getSchoolYear());
+        }
+    }
+
+    private List<Student> getStudents_mechanism(String sqlQuery) {
+        List<Student> output = new LinkedList<Student>();
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            int id;
+            String surname, name, studentGroup, schoolYear;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                surname = resultSet.getString("surname");
+                name = resultSet.getString("name");
+                studentGroup = resultSet.getString("studentGroup");
+                schoolYear = resultSet.getString("schoolYear");
+
+                output.add(new Student(id, surname, name, studentGroup, schoolYear));
+            }
+        } catch (SQLException e) {
+            System.err.println("Problem with reading data from database");
+            e.printStackTrace();
+            return null;
+        }
+        return output;
+    }
+
+    // ----------------------
 
     @Override
     public void finalize() {
