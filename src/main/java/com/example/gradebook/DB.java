@@ -69,26 +69,26 @@ public class DB {
 //        return true;
 //    }
 
-    public List<User> getData(String table) {
-        List<User> output = new LinkedList<User>();
-        try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + table);
-            int id;
-            String login, password;
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                login = resultSet.getString("login");
-                password = resultSet.getString("password");
-
-                output.add(new User(id, login, password));
-            }
-        } catch (SQLException e) {
-            System.err.println("Problem with reading data from database");
-            e.printStackTrace();
-            return null;
-        }
-        return output;
-    }
+//    public List<User> getData(String table) {
+//        List<User> output = new LinkedList<User>();
+//        try {
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + table);
+//            int id;
+//            String login, password;
+//            while (resultSet.next()) {
+//                id = resultSet.getInt("id");
+//                login = resultSet.getString("login");
+//                password = resultSet.getString("password");
+//
+//                output.add(new User(id, login, password));
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("Problem with reading data from database");
+//            e.printStackTrace();
+//            return null;
+//        }
+//        return output;
+//    }
 
     public void closeConnection() {
         try {

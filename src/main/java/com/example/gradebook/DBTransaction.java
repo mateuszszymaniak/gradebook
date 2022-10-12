@@ -1,7 +1,9 @@
 package com.example.gradebook;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DBTransaction extends DB {
@@ -25,9 +27,29 @@ public class DBTransaction extends DB {
         }
     }
 
-    public void showUsers() {
-        List<User> list = getData("users");
+    private List<User> getUsers() {
+        List<User> output = new LinkedList<User>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+            int id;
+            String login, password;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                login = resultSet.getString("login");
+                password = resultSet.getString("password");
 
+                output.add(new User(id, login, password));
+            }
+        } catch (SQLException e) {
+            System.err.println("Problem with reading data from database");
+            e.printStackTrace();
+            return null;
+        }
+        return output;
+    }
+
+    public void printUsers() {
+        List<User> list = getUsers();
         for (User usr : list) {
             System.out.println(usr.getId() + " " + usr.getLogin() + " " + usr.getPassword());
         }
