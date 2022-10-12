@@ -78,7 +78,7 @@ public class DB {
         return output;
     }
 
-    public void closeConnetion() {
+    public void closeConnection() {
         try {
             connection.close();
         } catch (SQLException e) {
