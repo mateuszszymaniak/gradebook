@@ -11,8 +11,8 @@ public class DB {
     private static final String PASSWORD = "";
     private static final String[] tables = {"users"};
     private static final String[] fieldsCreationFormula = {"(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))"};
-    private Connection connection;
-    private Statement statement;
+    protected Connection connection;
+    protected Statement statement;
 
     public DB () {
         try {
@@ -54,20 +54,20 @@ public class DB {
         return true;
     }
 
-    public boolean insertData(String table, String login, String password) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
-                    table + " (`id`,`login`,`password`) VALUES (null,?,?)");
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            System.err.println("Error while inserting user data: " + login);
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
+//    public boolean insertData(String table, String login, String password) {
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
+//                    table + " (`id`,`login`,`password`) VALUES (null,?,?)");
+//            preparedStatement.setString(1, login);
+//            preparedStatement.setString(2, password);
+//            preparedStatement.execute();
+//        } catch (SQLException e) {
+//            System.err.println("Error while inserting user data: " + login);
+//            e.printStackTrace();
+//            return false;
+//        }
+//        return true;
+//    }
 
     public List<User> getData(String table) {
         List<User> output = new LinkedList<User>();
