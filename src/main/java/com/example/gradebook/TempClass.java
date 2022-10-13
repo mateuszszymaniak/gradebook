@@ -8,7 +8,7 @@ public class TempClass {
         // User class
 
         DBTransaction tx = new DBTransaction();
-        if (tx.registerUser("admin", "1234567p")) System.out.println("Signed up");   // register new user, return true or false
+        if (tx.registerUser("admin", "1234567p")) System.out.println("Signed up");   // register new user; return true or false
         else System.out.println("This login is existing in db");
         tx.printUsers(0); // show all users (id, login, password)   // userId=0 to show all users, type specified userId to get one user with this ID
         if (tx.signIn("usr1", "qwerty")) {  // sign in method; return true or false
@@ -21,7 +21,7 @@ public class TempClass {
 
         //Student class
 
-        tx.addStudent("Kowalski", "Jan", "4c", "2022/2023");    // add student to the db, return true or false
+        tx.addStudent("Kowalski", "Jan", "4c", "2022/2023");    // add student to the db; return true or false
         tx.printStudents(); // show all students (id, name, surname, studentGroup, schoolYear)
 
         List<Student> y = tx.getStudents_byId(2);  // return list of students by specified id; put 0 to get all students
