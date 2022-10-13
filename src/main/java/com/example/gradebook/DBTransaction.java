@@ -178,11 +178,38 @@ public class DBTransaction extends DB {
             preparedStatement.setInt(6, userId);
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.err.println("Error while inserting student data: " + grade + " studentId-" + studentId);
+            System.err.println("Error while inserting grade data: " + grade + " studentId-" + studentId);
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    public boolean editGrade(int id, double grade, String subject, String type, String comment, int studentId, int userId) {
+        List<Grade> list = getGrades_mechanism("SELECT * FROM `grades` WHERE `id`=" + id);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `grades` SET " +
+                        "`grade`=?,`subject`=?,`type`=?,`comment`=?,`studentId`=?,`userId`=? " +
+                        "WHERE `id`=" + id);
+                preparedStatement.setDouble(1, grade);
+                preparedStatement.setString(2, subject);
+                preparedStatement.setString(3, type);
+                preparedStatement.setString(4, comment);
+                preparedStatement.setInt(5, studentId);
+                preparedStatement.setInt(6, userId);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                System.err.println("Error while editing grade data: " + grade + " id-" + id);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
     }
 
     private List<Grade> getGrades_mechanism(String sqlQuery) {

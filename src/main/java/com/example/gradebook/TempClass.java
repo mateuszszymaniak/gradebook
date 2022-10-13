@@ -39,5 +39,6 @@ public class TempClass {
         //Grade class
 
         tx.addGrade(5, "math", "exam", "", 2, 1);   // add grade to the db, return true or false
+        tx.editGrade(1, 4.5, "math", "exam", "corrected", 2, 1); // edit grade in db, return true or false
     }
 }
