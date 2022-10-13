@@ -33,5 +33,11 @@ public class TempClass {
         tx.getStudents_bySurname("Nowak");   // return list of students by surname
         tx.getStudents_byGroup("4c");   // return list of students by students' group
         tx.getStudents_bySchoolYear("2022/2023");   // return list of students by school year
+
+
+
+        //Student class
+
+
     }
 }
