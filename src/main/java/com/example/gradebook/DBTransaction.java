@@ -212,6 +212,25 @@ public class DBTransaction extends DB {
         }
     }
 
+    public boolean deleteGrade(int id) {
+        List<Grade> list = getGrades_mechanism("SELECT * FROM `grades` WHERE `id`=" + id);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                String delete = "DELETE FROM `grades` WHERE `id`=" + id;
+                statement.execute(delete);
+            } catch (SQLException e) {
+                System.err.println("Error while deleting grade data: id-" + id);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     private List<Grade> getGrades_mechanism(String sqlQuery) {
         List<Grade> output = new LinkedList<Grade>();
         try {
