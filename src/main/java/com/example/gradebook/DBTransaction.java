@@ -48,6 +48,27 @@ public class DBTransaction extends DB {
         }
     }
 
+    public boolean changePassword(int id, String password) {
+        List<User> list = getUsers(id);
+        if (list.isEmpty()) {
+            System.err.println("User not found");
+            return false;
+        }
+        else {
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `users` SET " +
+                        "`password`=? WHERE `id`=" + id);
+                preparedStatement.setString(1, password);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                System.err.println("Error while editing user data: id-" + id);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     private List<User> getUsers(int id) {
         if (id==0){
             return getUsers_mechanism("SELECT * FROM users");
