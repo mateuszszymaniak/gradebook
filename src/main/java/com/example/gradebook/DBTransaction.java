@@ -106,6 +106,32 @@ public class DBTransaction extends DB {
         return true;
     }
 
+    public List<Student> getStudents_byId(int studentId) {
+        if (studentId==0){
+            return getStudents_mechanism("SELECT * FROM students");
+
+        }
+        else {
+            return getStudents_mechanism("SELECT * FROM students WHERE id=" + studentId);
+        }
+    }
+
+    public List<Student> getStudents_byName(String name) {
+        return getStudents_mechanism("SELECT * FROM students WHERE name LIKE '" + name + "'");
+    }
+
+    public List<Student> getStudents_bySurname(String surname) {
+        return getStudents_mechanism("SELECT * FROM students WHERE surname LIKE '" + surname + "'");
+    }
+
+    public List<Student> getStudents_byGroup(String studentGroup) {
+        return getStudents_mechanism("SELECT * FROM students WHERE studentGroup LIKE '" + studentGroup + "'");
+    }
+
+    public List<Student> getStudents_bySchoolYear(String schoolYear) {
+        return getStudents_mechanism("SELECT * FROM students WHERE schoolYear LIKE '" + schoolYear + "'");
+    }
+
     public void printStudents() {
         List<Student> list = getStudents_mechanism("SELECT * FROM students");
         for (Student stud : list) {

@@ -17,8 +17,21 @@ public class TempClass {
             System.out.println("Incorrect pass");
         }
 
+
+
         //Student class
+
         tx.addStudent("Kowalski", "Jan", "4c", "2022/2023");    // add student to the db, return true or false
         tx.printStudents(); // show all students (id, name, surname, studentGroup, schoolYear)
+
+        List<Student> y = tx.getStudents_byId(2);  // return list of students by specified id; put 0 to get all students
+        for (Student s : y){
+            System.out.println(s.getName());
+        }
+
+        tx.getStudents_byName("Jan");   // return list of students by name
+        tx.getStudents_bySurname("Nowak");   // return list of students by surname
+        tx.getStudents_byGroup("4c");   // return list of students by students' group
+        tx.getStudents_bySchoolYear("2022/2023");   // return list of students by school year
     }
 }
