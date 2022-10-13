@@ -166,7 +166,50 @@ public class DBTransaction extends DB {
     // ----------------------
     // Grade class
     // ----------------------
+    public boolean addGrade(double grade, String subject, String type, String comment, int studentId, int userId) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
+                    "`grades`(`id`, `grade`, `subject`, `type`, `comment`, `studentId`, `userId`) VALUES (null,?,?,?,?,?,?)");
+            preparedStatement.setDouble(1, grade);
+            preparedStatement.setString(2, subject);
+            preparedStatement.setString(3, type);
+            preparedStatement.setString(4, comment);
+            preparedStatement.setInt(5, studentId);
+            preparedStatement.setInt(6, userId);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.err.println("Error while inserting student data: " + grade + " studentId-" + studentId);
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
+    private List<Grade> getGrades_mechanism(String sqlQuery) {
+        List<Grade> output = new LinkedList<Grade>();
+        try {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            int id, studentId, UserId;
+            double grade;
+            String subject, type, comment;
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                grade = resultSet.getDouble("grade");
+                subject = resultSet.getString("subject");
+                type = resultSet.getString("type");
+                comment = resultSet.getString("comment");
+                studentId = resultSet.getInt("studentId");
+                UserId = resultSet.getInt("UserId");
+
+                output.add(new Grade(id, grade, subject, type, comment, studentId, UserId));
+            }
+        } catch (SQLException e) {
+            System.err.println("Problem with reading data from database");
+            e.printStackTrace();
+            return null;
+        }
+        return output;
+    }
 
 
     // ----------------------

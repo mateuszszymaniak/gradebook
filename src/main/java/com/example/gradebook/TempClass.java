@@ -36,8 +36,8 @@ public class TempClass {
 
 
 
-        //Student class
+        //Grade class
 
-
+        tx.addGrade(5, "math", "exam", "", 2, 1);   // add grade to the db, return true or false
     }
 }
