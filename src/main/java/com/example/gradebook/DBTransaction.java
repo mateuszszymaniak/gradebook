@@ -186,7 +186,7 @@ public class DBTransaction extends DB {
     }
 
     public boolean editGrade(int id, double grade, String subject, String type, String comment, int studentId, int userId) {
-        List<Grade> list = getGrades_mechanism("SELECT * FROM `grades` WHERE `id`=" + id);
+        List<Grade> list = getGrades_byId(id);
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
@@ -213,7 +213,7 @@ public class DBTransaction extends DB {
     }
 
     public boolean deleteGrade(int id) {
-        List<Grade> list = getGrades_mechanism("SELECT * FROM `grades` WHERE `id`=" + id);
+        List<Grade> list = getGrades_byId(id);
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
@@ -229,6 +229,34 @@ public class DBTransaction extends DB {
             }
             return true;
         }
+    }
+
+    public List<Grade> getGrades_byId (int id) {
+        return getGrades_mechanism("SELECT * FROM grades WHERE grades.id=" + id);
+    }
+
+    public List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
+                "WHERE grades.studentId=" + studentId + " AND students.schoolYear LIKE " + schoolYear);
+    }
+
+    public List<Grade> getGrades_byUserId (int userId, String schoolYear) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
+                "WHERE grades.userId=" + userId + " AND students.schoolYear LIKE " + schoolYear);
+    }
+
+    public List<Grade> getGrades_bySubject (String subject, String schoolYear) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
+                "WHERE grades.subject='" + subject + "' AND students.schoolYear LIKE " + schoolYear);
+    }
+
+    public List<Grade> getGrades_byStudentGroup_nSubject (String subject, String studentGroup, String schoolYear) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id WHERE students.studentGroup LIKE '" + studentGroup + "' " +
+                "AND grades.subject LIKE '" + subject + "' AND students.schoolYear LIKE " + schoolYear);
     }
 
     private List<Grade> getGrades_mechanism(String sqlQuery) {
