@@ -106,6 +106,31 @@ public class DBTransaction extends DB {
         return true;
     }
 
+    public boolean editStudent(int id, String surname, String name, String studentGroup, String schoolYear) {
+        List<Student> list = getStudents_byId(id);
+        if (list.isEmpty()) {
+            System.err.println("Student not found");
+            return false;
+        }
+        else {
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `students` SET " +
+                        "`surname`=?,`name`=?,`studentGroup`=?,`schoolYear`=? " +
+                        "WHERE `id`=" + id);
+                preparedStatement.setString(1, surname);
+                preparedStatement.setString(2, name);
+                preparedStatement.setString(3, studentGroup);
+                preparedStatement.setString(4, schoolYear);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                System.err.println("Error while editing student data: " + name + " " + surname);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     public List<Student> getStudents_byId(int studentId) {
         if (studentId==0){
             return getStudents_mechanism("SELECT * FROM students");
