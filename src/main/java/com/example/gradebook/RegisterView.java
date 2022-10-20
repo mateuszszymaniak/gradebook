@@ -22,20 +22,27 @@ public class RegisterView {
     private Label errorMsg;
 
     public void onClickBtnRegister(ActionEvent actionEvent) {
+        DBTransaction db = new DBTransaction();
         String errors = "";
-        // przyda sie if na sprawdzenie czy login jest w bazie
-
-        if(!passwordText.getText().equals(passwordTextRepeated.getText())){
-            passwordText.setStyle("-fx-border-color: red;");
-            passwordTextRepeated.setStyle("-fx-border-color: red;");
-            errors = "Hasła nie są takie same!";
-            errorMsg.setText(errors);
-            errorMsg.setVisible(true);
-        } else {
+        String login = loginText.getText().trim();
+        String password = passwordText.getText().trim();
+        String passwordRepeated = passwordTextRepeated.getText().trim();
+        if(!login.equals("") && password.equals(passwordRepeated)){
             passwordText.setStyle("-fx-border-color: none;");
             passwordTextRepeated.setStyle("-fx-border-color: none;");
             errorMsg.setVisible(false);
-
+            db.registerUser(login, password);
+        } else if (login.equals("")) {
+            loginText.setStyle("-fx-border-color: red;");
+            errors += "Nie podano loginu!\n";
+            errorMsg.setText(errors);
+            errorMsg.setVisible(true);
+        } else {
+            passwordText.setStyle("-fx-border-color: red;");
+            passwordTextRepeated.setStyle("-fx-border-color: red;");
+            errors += "Hasła nie są takie same!";
+            errorMsg.setText(errors);
+            errorMsg.setVisible(true);
         }
     }
 
