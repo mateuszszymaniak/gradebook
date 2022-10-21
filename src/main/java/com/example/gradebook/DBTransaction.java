@@ -69,6 +69,16 @@ public class DBTransaction extends DB {
         }
     }
 
+    public boolean ifUserExist(String login) {
+        List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "'");
+        if (list.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     private List<User> getUsers(int id) {
         if (id==0){
             return getUsers_mechanism("SELECT * FROM users");
