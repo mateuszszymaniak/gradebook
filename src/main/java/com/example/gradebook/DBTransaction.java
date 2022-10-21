@@ -89,7 +89,7 @@ public class DBTransaction extends DB {
         }
     }
 
-    private List<User> getUsers_mechanism(String sqlQuery) {
+    protected List<User> getUsers_mechanism(String sqlQuery) {
         List<User> output = new LinkedList<User>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -195,7 +195,7 @@ public class DBTransaction extends DB {
         }
     }
 
-    private List<Student> getStudents_mechanism(String sqlQuery) {
+    protected List<Student> getStudents_mechanism(String sqlQuery) {
         List<Student> output = new LinkedList<Student>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -315,7 +315,7 @@ public class DBTransaction extends DB {
                 "AND grades.subject LIKE '" + subject + "' AND students.schoolYear LIKE " + schoolYear);
     }
 
-    private List<Grade> getGrades_mechanism(String sqlQuery) {
+    protected List<Grade> getGrades_mechanism(String sqlQuery) {
         List<Grade> output = new LinkedList<Grade>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
