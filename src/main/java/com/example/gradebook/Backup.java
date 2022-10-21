@@ -1,6 +1,7 @@
 package com.example.gradebook;
 
 import javafx.util.Pair;
+import org.jasypt.util.text.StrongTextEncryptor;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
@@ -28,7 +29,7 @@ public class Backup extends DBTransaction{
     // Export backup
     // ----------------------
 
-    public void createBackup() {
+    public void createBackup(String key) {
         Document doc = xmlBegin();
 
         Element gradebook = new Element("gradebook");
@@ -37,17 +38,17 @@ public class Backup extends DBTransaction{
         Element grade = new Element("grades");
 
         for (User item : users) {
-            Element userElement = userToXML(item);
+            Element userElement = userToXML(item, key);
             user.addContent(userElement);
         }
 
         for (Student item : students) {
-            Element studentElement = studentToXML(item);
+            Element studentElement = studentToXML(item, key);
             student.addContent(studentElement);
         }
 
         for (Grade item : grades) {
-            Element gradeElement = gradeToXML(item);
+            Element gradeElement = gradeToXML(item, key);
             grade.addContent(gradeElement);
         }
 
@@ -59,33 +60,39 @@ public class Backup extends DBTransaction{
         saveXML(doc);
     }
 
-    public Element userToXML(User usr) {
-            Element userElement = new Element("user");
-            userElement.setAttribute(new Attribute("id", Integer.toString(usr.getId())));
+    public Element userToXML(User usr, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
 
-            Element login = new Element("login");
-            login.setText(usr.getLogin());
-            Element password = new Element("password");
-            password.setText(usr.getPassword());
+        Element userElement = new Element("user");
+        userElement.setAttribute(new Attribute("id", Integer.toString(usr.getId())));
 
-            userElement.addContent(login);
-            userElement.addContent(password);
+        Element login = new Element("login");
+        login.setText(textEncryptor.encrypt(usr.getLogin()));
+        Element password = new Element("password");
+        password.setText(textEncryptor.encrypt(usr.getPassword()));
 
-            return userElement;
+        userElement.addContent(login);
+        userElement.addContent(password);
+
+        return userElement;
     }
 
-    public Element studentToXML(Student stud) {
+    public Element studentToXML(Student stud, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
+
         Element studentElement = new Element("student");
         studentElement.setAttribute(new Attribute("id", Integer.toString(stud.getId())));
 
         Element surname = new Element("surname");
-        surname.setText(stud.getSurname());
+        surname.setText(textEncryptor.encrypt(stud.getSurname()));
         Element name = new Element("name");
-        name.setText(stud.getName());
+        name.setText(textEncryptor.encrypt(stud.getName()));
         Element studentGroup = new Element("studentGroup");
-        studentGroup.setText(stud.getStudentGroup());
+        studentGroup.setText(textEncryptor.encrypt(stud.getStudentGroup()));
         Element schoolYear = new Element("schoolYear");
-        schoolYear.setText(stud.getSchoolYear());
+        schoolYear.setText(textEncryptor.encrypt(stud.getSchoolYear()));
 
         studentElement.addContent(surname);
         studentElement.addContent(name);
@@ -95,22 +102,25 @@ public class Backup extends DBTransaction{
         return studentElement;
     }
 
-    public Element gradeToXML(Grade gr) {
+    public Element gradeToXML(Grade gr, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
+
         Element gradeElement = new Element("grade");
         gradeElement.setAttribute(new Attribute("id", Integer.toString(gr.getId())));
 
         Element gradeVal = new Element("grade");
-        gradeVal.setText(Double.toString(gr.getGrade()));
+        gradeVal.setText(textEncryptor.encrypt(Double.toString(gr.getGrade())));
         Element subject = new Element("subject");
-        subject.setText(gr.getSubject());
+        subject.setText(textEncryptor.encrypt(gr.getSubject()));
         Element type = new Element("type");
-        type.setText(gr.getType());
+        type.setText(textEncryptor.encrypt(gr.getType()));
         Element comment = new Element("comment");
-        comment.setText(gr.getComment());
+        comment.setText(textEncryptor.encrypt(gr.getComment()));
         Element studentId = new Element("studentId");
-        studentId.setText(Integer.toString(gr.getStudentId()));
+        studentId.setText(textEncryptor.encrypt(Integer.toString(gr.getStudentId())));
         Element userId = new Element("userId");
-        userId.setText(Integer.toString(gr.getUserId()));
+        userId.setText(textEncryptor.encrypt(Integer.toString(gr.getUserId())));
 
         gradeElement.addContent(gradeVal);
         gradeElement.addContent(subject);
@@ -149,14 +159,14 @@ public class Backup extends DBTransaction{
     // Import backup
     // ----------------------
 
-    public boolean importBackup() {
+    public boolean importBackup(String key) {
         if (initImport()) {
             Element xml = xmlReadBegin();
             if (xml != null) {
                 Element gradebook = xml.getChild("gradebook");
-                if (!processUser(gradebook.getChildren("users"))) return false;
-                if (!processStudent(gradebook.getChildren("students"))) return false;
-                if (!processGrade(gradebook.getChildren("grades"))) return false;
+                if (!processUser(gradebook.getChildren("users"), key)) return false;
+                if (!processStudent(gradebook.getChildren("students"), key)) return false;
+                if (!processGrade(gradebook.getChildren("grades"), key)) return false;
             }
         }
         return true;
@@ -191,13 +201,16 @@ public class Backup extends DBTransaction{
         return doc.getRootElement();
     }
 
-    private boolean processUser(List<Element> usersList) {
+    private boolean processUser(List<Element> usersList, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
+
         String login, password;
         List<Element> users = usersList.get(0).getChildren("user");
         for (int i=0; i<users.size();i++) {
             Element user = users.get(i);
-            login = user.getChildText("login");
-            password = user.getChildText("password");
+            login = textEncryptor.decrypt(user.getChildText("login"));
+            password = textEncryptor.decrypt(user.getChildText("password"));
             if(!registerUser(login, password)) {
                 return false;
             }
@@ -205,15 +218,18 @@ public class Backup extends DBTransaction{
         return true;
     }
 
-    private boolean processStudent(List<Element> studentsList) {
+    private boolean processStudent(List<Element> studentsList, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
+
         String surname, name, studentGroup, schoolYear;
         List<Element> students = studentsList.get(0).getChildren("student");
         for (int i=0;i<students.size();i++) {
             Element student = students.get(i);
-            surname = student.getChildText("surname");
-            name = student.getChildText("name");
-            studentGroup = student.getChildText("studentGroup");
-            schoolYear = student.getChildText("schoolYear");
+            surname = textEncryptor.decrypt(student.getChildText("surname"));
+            name = textEncryptor.decrypt(student.getChildText("name"));
+            studentGroup = textEncryptor.decrypt(student.getChildText("studentGroup"));
+            schoolYear = textEncryptor.decrypt(student.getChildText("schoolYear"));
             if(!addStudent(surname, name, studentGroup, schoolYear)) {
                 return false;
             }
@@ -221,19 +237,22 @@ public class Backup extends DBTransaction{
         return true;
     }
 
-    private boolean processGrade(List<Element> gradesList) {
+    private boolean processGrade(List<Element> gradesList, String key) {
+        StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+        textEncryptor.setPassword(key);
+
         double grade;
         String subject, type, comment;
         int studentId, userId;
         List<Element> grades = gradesList.get(0).getChildren("grade");
         for (int i=0;i<grades.size();i++) {
             Element gr = grades.get(i);
-            grade = Double.parseDouble(gr.getChildText("grade"));
-            subject = gr.getChildText("subject");
-            type = gr.getChildText("type");
-            comment = gr.getChildText("comment");
-            studentId = Integer.parseInt(gr.getChildText("studentId"));
-            userId = Integer.parseInt(gr.getChildText("userId"));
+            grade = Double.parseDouble(textEncryptor.decrypt(gr.getChildText("grade")));
+            subject = textEncryptor.decrypt(gr.getChildText("subject"));
+            type = textEncryptor.decrypt(gr.getChildText("type"));
+            comment = textEncryptor.decrypt(gr.getChildText("comment"));
+            studentId = Integer.parseInt(textEncryptor.decrypt(gr.getChildText("studentId")));
+            userId = Integer.parseInt(textEncryptor.decrypt(gr.getChildText("userId")));
             if(!addGrade(grade, subject, type, comment, studentId, userId)) {
                 return false;
             }

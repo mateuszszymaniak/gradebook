@@ -4,9 +4,11 @@
 ```java
 Backup bckp = new Backup();
 
-bckp.createBackup();    // crete backup from database to the .xml file
-bckp.importBackup();    // import backup to the database
+bckp.createBackup("secretKey");    // crete backup from database to the .xml file
+bckp.importBackup("secretKey");    // import backup to the database
 ```
+* `"secretKey"` is the encryption / decryption password
+---
 ___NOTE:___
 1. Database backups are stored in _backup.xml_ file in main directory. [See example](backup.xml).
 2. During next backup new data are __overriding__ old backup. Pay attention to it.

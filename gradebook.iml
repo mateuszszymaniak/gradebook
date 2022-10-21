@@ -57,5 +57,6 @@
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct-processor:1.5.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.5.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jdom:jdom2:2.0.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jasypt:jasypt:1.9.3" level="project" />
   </component>
 </module>
