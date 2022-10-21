@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <gradebook>
+    <users>
+      <user id="1">
+        <login>admin</login>
+        <password>wasd000</password>
+      </user>
+      <user id="2">
+        <login>usr1</login>
+        <password>qwerty</password>
+      </user>
+      <user id="3">
+        <login>usr2</login>
+        <password>zaq1@WSX</password>
+      </user>
+      <user id="4">
+        <login>admin</login>
+        <password>1234567p</password>
+      </user>
+    </users>
+    <students>
+      <student id="1">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="2">
+        <surname>Nowakowska</surname>
+        <name>Anna</name>
+        <studentGroup>3e</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="3">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="4">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="5">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="6">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="7">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="8">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="9">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="10">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="11">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="12">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="13">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="14">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="15">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="16">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="17">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="18">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="19">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="20">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="21">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="22">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="23">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="24">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="25">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="26">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="27">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="28">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="29">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+      <student id="30">
+        <surname>Kowalski</surname>
+        <name>Jan</name>
+        <studentGroup>4c</studentGroup>
+        <schoolYear>2022/2023</schoolYear>
+      </student>
+    </students>
+    <grades>
+      <grade id="1">
+        <grade>4.5</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment>corrected</comment>
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="3">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="4">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="5">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="6">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="7">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="8">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="9">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="10">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="11">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="12">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="13">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="14">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="15">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="16">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="17">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="18">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="19">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+      <grade id="20">
+        <grade>5.0</grade>
+        <subject>math</subject>
+        <type>exam</type>
+        <comment />
+        <studentId>2</studentId>
+        <userId>1</userId>
+      </grade>
+    </grades>
+  </gradebook>
+</xml>
