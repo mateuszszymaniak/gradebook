@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="217.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.RegisterController">
+    <Label layoutX="39.0" layoutY="42.0" text="Zarejestrowano pomyślnie" />
+    <Button fx:id="closeButton" layoutX="93.0" layoutY="82.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Ok" />
+</Pane>
