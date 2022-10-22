@@ -53,7 +53,7 @@ public class HelloController {
     }
     public void loggedWindow(String login) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("logged-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 428, 373);
         Stage loggedWindow = new Stage();
         loggedWindow.setTitle("Dziennik " + login);
         loggedWindow.setScene(scene);
