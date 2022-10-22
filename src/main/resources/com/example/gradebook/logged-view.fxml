@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="com.example.gradebook.LoggedView"/>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.LoggedController">
+   <children>
+      <Button fx:id="addStudent" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj ucznia" />
+      <Button fx:id="addGrade" layoutX="119.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddGrade" text="Dodaj ocene" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="51.0" prefHeight="175.0" prefWidth="369.0">
+        <columns>
+          <TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
+          <TableColumn fx:id="imie" prefWidth="75.0" text="Imię" />
+          <TableColumn fx:id="klasa" prefWidth="75.0" text="Klasa" />
+          <TableColumn fx:id="rokSzkolny" prefWidth="75.0" text="Rok szkolny" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>
