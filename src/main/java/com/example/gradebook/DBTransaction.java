@@ -137,6 +137,16 @@ public class DBTransaction extends DB {
         return true;
     }
 
+    public boolean ifStudentExist() {
+        List<Student> list = getStudents_mechanism("SELECT * FROM students");
+        if (list.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     public boolean editStudent(int id, String surname, String name, String studentGroup, String schoolYear) {
         List<Student> list = getStudents_byId(id);
         if (list.isEmpty()) {
