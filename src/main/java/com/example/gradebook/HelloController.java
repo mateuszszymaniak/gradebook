@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,6 +59,7 @@ public class HelloController {
         loggedWindow.setTitle("Dziennik " + login);
         loggedWindow.setScene(scene);
         loggedWindow.initModality(Modality.WINDOW_MODAL);
+        loggedWindow.setUserData(login);
         loggedWindow.show();
     }
 }

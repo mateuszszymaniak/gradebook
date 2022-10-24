@@ -26,4 +26,8 @@ public class Student {
         this.schoolYear = schoolYear;
         this.toDelete = toDelete;
     }
+    public Student(int id, String name, String surname){
+        this.id = id;
+        String fullname = name + " " + surname;
+    }
 }
