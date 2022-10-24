@@ -251,6 +251,15 @@ public class DBTransaction extends DB {
         return true;
     }
 
+    public boolean ifGradeExist() {
+        List<Grade> list = getGrades_mechanism("SELECT * FROM grades");
+        if (list.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     public boolean editGrade(int id, double grade, String subject, String type, String comment, int studentId, int userId) {
         List<Grade> list = getGrades_byId(id);
         if (list.isEmpty()) {
