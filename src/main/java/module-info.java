@@ -14,6 +14,7 @@ module com.example.gradebook {
     requires org.mapstruct;
     requires org.mapstruct.processor;
     requires mysql.connector.java;
+    requires org.apache.commons.collections4;
 
     opens com.example.gradebook to javafx.fxml;
     exports com.example.gradebook;
