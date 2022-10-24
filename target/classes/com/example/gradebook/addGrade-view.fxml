@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gradebook.AddGradeController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane prefHeight="341.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.AddGradeController">
+   <children>
+      <Label layoutX="21.0" layoutY="49.0" text="Imię i nazwisko ucznia" />
+      <ChoiceBox fx:id="studentName" layoutX="160.0" layoutY="45.0" prefWidth="150.0" />
+      <Label layoutX="21.0" layoutY="87.0" text="Przedmiot" />
+      <ChoiceBox fx:id="subject" layoutX="160.0" layoutY="83.0" prefWidth="150.0" />
+      <Label layoutX="21.0" layoutY="125.0" text="Rodzaj oceny" />
+      <ChoiceBox fx:id="gradeType" layoutX="160.0" layoutY="121.0" prefWidth="150.0" />
+      <Label layoutX="21.0" layoutY="162.0" text="Ocena" />
+      <TextField fx:id="grade" layoutX="160.0" layoutY="159.0" />
+      <Label layoutX="21.0" layoutY="201.0" text="Komentarz" />
+      <TextField fx:id="comment" layoutX="160.0" layoutY="197.0" />
+      <Button fx:id="addGrade" layoutX="65.0" layoutY="249.0" mnemonicParsing="false" onAction="#onClickBtnAddGrade" text="Dodaj" />
+      <Button fx:id="cancelButton" layoutX="209.0" layoutY="249.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Anuluj" />
+      <Label layoutX="14.0" layoutY="14.0" />
+      <Label fx:id="errorMsg" layoutX="14.0" layoutY="14.0" text="" textFill="RED" visible="false" />
+   </children>
+</Pane>
