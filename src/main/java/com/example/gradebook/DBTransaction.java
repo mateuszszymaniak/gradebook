@@ -27,7 +27,7 @@ public class DBTransaction extends DB {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
                         "users (`id`,`login`,`password`) VALUES (null,?,?)");
                 preparedStatement.setString(1, login);
-                preparedStatement.setString(2, password);
+                preparedStatement.setString(2, String.valueOf(password.hashCode()));
                 preparedStatement.execute();
             } catch (SQLException e) {
                 System.err.println("Error while inserting user data: " + login);
@@ -39,7 +39,7 @@ public class DBTransaction extends DB {
     }
 
     public boolean signIn(String login, String password) {
-        List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "' AND password LIKE '" + password + "'");
+        List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "' AND password LIKE '" + password.hashCode() + "'");
         if(list.isEmpty()){
             return false;
         }
@@ -58,7 +58,7 @@ public class DBTransaction extends DB {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `users` SET " +
                         "`password`=? WHERE `id`=" + id);
-                preparedStatement.setString(1, password);
+                preparedStatement.setString(1, String.valueOf(password.hashCode()));
                 preparedStatement.execute();
             } catch (SQLException e) {
                 System.err.println("Error while editing user data: id-" + id);
@@ -89,7 +89,7 @@ public class DBTransaction extends DB {
         }
     }
 
-    private List<User> getUsers_mechanism(String sqlQuery) {
+    protected List<User> getUsers_mechanism(String sqlQuery) {
         List<User> output = new LinkedList<User>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -205,7 +205,7 @@ public class DBTransaction extends DB {
         }
     }
 
-    private List<Student> getStudents_mechanism(String sqlQuery) {
+    protected List<Student> getStudents_mechanism(String sqlQuery) {
         List<Student> output = new LinkedList<Student>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -334,7 +334,7 @@ public class DBTransaction extends DB {
                 "AND grades.subject LIKE '" + subject + "' AND students.schoolYear LIKE " + schoolYear);
     }
 
-    private List<Grade> getGrades_mechanism(String sqlQuery) {
+    protected List<Grade> getGrades_mechanism(String sqlQuery) {
         List<Grade> output = new LinkedList<Grade>();
         try {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
