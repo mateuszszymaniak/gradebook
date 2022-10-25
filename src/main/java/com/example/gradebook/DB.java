@@ -9,7 +9,7 @@ public class DB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/gradebook";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
-    private static final String[] tables = {"users","students","grades"};
+    protected static final String[] tables = {"users","students","grades"};
     private static final String[] fieldsCreationFormula = {"(id INTEGER AUTO_INCREMENT, login VARCHAR(45), password VARCHAR(50), PRIMARY KEY (id))",
             "(id INTEGER AUTO_INCREMENT, surname VARCHAR(50), name VARCHAR(45), studentGroup VARCHAR(5), schoolYear VARCHAR(9), PRIMARY KEY (id))",
             "(id INTEGER AUTO_INCREMENT, grade DOUBLE(2, 1), subject VARCHAR(40), type VARCHAR(30), comment VARCHAR(80), studentId INTEGER, userId INTEGER," +
