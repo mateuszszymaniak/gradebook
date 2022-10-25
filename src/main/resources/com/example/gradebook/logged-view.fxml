@@ -7,12 +7,12 @@
    <children>
       <TableView fx:id="table" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
         <columns>
-          <TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
+          <!--<TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
           <TableColumn fx:id="imie" prefWidth="75.0" text="Imię" />
           <TableColumn fx:id="klasa" prefWidth="75.0" text="Klasa" />
           <TableColumn fx:id="rokSzkolny" prefWidth="75.0" text="Rok szkolny" />
-          <TableColumn fx:id="toDelete" prefWidth="75.0" text="Czy usunąć?" visible="false" />
-        </columns>
+          <TableColumn fx:id="action" prefWidth="75.0" text="Akcja" visible="false" />
+        --></columns>
       </TableView>
       <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="210.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -21,7 +21,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="85.0" prefWidth="305.0">
                      <children>
                         <Button fx:id="addStudent" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
-                        <Button fx:id="editStudent" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" text="Edytuj" />
+                        <Button fx:id="editStudent" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
                         <Button fx:id="deleteStudent" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
                      </children>
                   </AnchorPane>
@@ -32,8 +32,8 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="addGrade" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddGrade" text="Dodaj" />
-                        <Button fx:id="editGrade" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" text="Edytuj" />
-                        <Button fx:id="deleteGrade" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" text="Usuń" />
+                        <Button fx:id="editGrade" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnEditGrade" text="Edytuj" />
+                        <Button fx:id="deleteGrade" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteGrade" text="Usuń" />
                      </children>
                   </AnchorPane>
             </content>

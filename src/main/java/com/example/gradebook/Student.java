@@ -18,14 +18,6 @@ public class Student {
         this.studentGroup = studentGroup;
         this.schoolYear = schoolYear;
     }
-    public Student(int id, String surname, String name, String studentGroup, String schoolYear, Boolean toDelete) {
-        this.id = id;
-        this.surname = surname;
-        this.name = name;
-        this.studentGroup = studentGroup;
-        this.schoolYear = schoolYear;
-        this.toDelete = toDelete;
-    }
     public Student(int id, String name, String surname){
         this.id = id;
         String fullname = name + " " + surname;

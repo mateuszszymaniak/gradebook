@@ -176,6 +176,25 @@ public class DBTransaction extends DB {
         }
     }
 
+    public boolean deleteStudent(int id) {
+        List<Student> list = getStudents_byId(id);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                String delete = "DELETE FROM `students` WHERE `id`=" + id;
+                statement.execute(delete);
+            } catch (SQLException e) {
+                System.err.println("Error while deleting student data: id-" + id);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     public List<Student> getStudents_byId(int studentId) {
         if (studentId==0){
             return getStudents_mechanism("SELECT * FROM students");

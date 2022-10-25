@@ -2,12 +2,18 @@ package com.example.gradebook;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.BidiMap;
@@ -54,7 +60,7 @@ public class AddGradeController {
         }
     }
 
-    public void onClickBtnAddGrade(ActionEvent actionEvent) {
+    public void onClickBtnAddGrade(ActionEvent actionEvent) throws IOException {
         DBTransaction db = new DBTransaction();
         String error = "";
         String gradeTypeValue = (String) gradeType.getValue();
@@ -70,8 +76,16 @@ public class AddGradeController {
 
         if (gradeTypeValue != null && subjectValue != null && !gradeValue.equals("") && studentIdValue != null) {
             db.addGrade(Double.parseDouble(gradeValue), subjectValue, gradeTypeValue, commentValue, studentIdValue, loggerUserId);
-            System.out.println("ok");
             errorMsg.setVisible(false);
+
+            closeWindow();
+
+            Parent fxmlLoader = FXMLLoader.load(RegisterController.class.getResource("successAddGrade-view.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(fxmlLoader));
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+            stage.show();
         } else if (studentIdValue == null){
             error += "Nie podano ucznia!\n";
             errorMsg.setText(error);
@@ -98,5 +112,10 @@ public class AddGradeController {
 
     public void setLoggedUser(String login) {
         loggerUserId = db.getUserId(login).get(0).getId();
+    }
+
+    public void closeWindow(){
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 }
