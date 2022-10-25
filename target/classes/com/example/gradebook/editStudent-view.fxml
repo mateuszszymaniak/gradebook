@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<Pane prefHeight="229.0" prefWidth="256.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.EditStudentController">
+    <children>
+        <Label layoutX="14.0" layoutY="47.0" text="Nazwisko" />
+        <Label layoutX="14.0" layoutY="83.0" text="Imię" />
+        <Label layoutX="14.0" layoutY="119.0" text="Klasa" />
+        <Label layoutX="14.0" layoutY="155.0" text="Rok szkolny" />
+        <TextField fx:id="surnameText" layoutX="97.0" layoutY="43.0" prefHeight="25.0" prefWidth="131.0" />
+        <TextField fx:id="nameText" layoutX="97.0" layoutY="79.0" prefHeight="25.0" prefWidth="131.0" />
+        <TextField fx:id="studentGroupText" layoutX="97.0" layoutY="115.0" prefHeight="25.0" prefWidth="131.0" />
+        <TextField fx:id="schoolYearText" layoutX="97.0" layoutY="151.0" prefHeight="25.0" prefWidth="131.0" />
+        <Button layoutX="40.0" layoutY="190.0" mnemonicParsing="false" onAction="#onClickBtnEdit" text="Edytuj" />
+        <Button fx:id="cancelButton" layoutX="151.0" layoutY="190.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Anuluj" />
+        <Label fx:id="errorMsg" layoutX="14.0" layoutY="14.0" text="Label" textFill="RED" visible="false" />
+    </children>
+</Pane>

@@ -89,6 +89,10 @@ public class DBTransaction extends DB {
         }
     }
 
+    protected List<User> getUserId(String login) {
+        return getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "'");
+    }
+
     protected List<User> getUsers_mechanism(String sqlQuery) {
         List<User> output = new LinkedList<User>();
         try {
@@ -165,6 +169,25 @@ public class DBTransaction extends DB {
                 preparedStatement.execute();
             } catch (SQLException e) {
                 System.err.println("Error while editing student data: " + name + " " + surname);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public boolean deleteStudent(int id) {
+        List<Student> list = getStudents_byId(id);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                String delete = "DELETE FROM `students` WHERE `id`=" + id;
+                statement.execute(delete);
+            } catch (SQLException e) {
+                System.err.println("Error while deleting student data: id-" + id);
                 e.printStackTrace();
                 return false;
             }
