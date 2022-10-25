@@ -89,6 +89,10 @@ public class DBTransaction extends DB {
         }
     }
 
+    protected List<User> getUserId(String login) {
+        return getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "'");
+    }
+
     protected List<User> getUsers_mechanism(String sqlQuery) {
         List<User> output = new LinkedList<User>();
         try {
