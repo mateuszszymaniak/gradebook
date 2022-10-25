@@ -38,6 +38,9 @@ public class LoggedController {
     @FXML private Tab oceny;
     @FXML private Pane contentPane;
 
+    private Parent root;
+    private String loggedUser;
+    private Integer loggedUserId;
 
     @FXML private void initialize() {
         DBTransaction db = new DBTransaction();
@@ -79,9 +82,14 @@ public class LoggedController {
     }
 
     public void onClickBtnAddGrade(ActionEvent actionEvent) throws IOException {
-        Parent fxmlLoader = FXMLLoader.load(HelloController.class.getResource("addGrade-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addGrade-view.fxml"));
+        root = fxmlLoader.load();
+        AddGradeController addGradeController = fxmlLoader.getController();
+        addGradeController.setLoggedUser(loggedUser);
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
-        stage.setScene(new Scene(fxmlLoader));
+        stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
         stage.show();
@@ -94,5 +102,6 @@ public class LoggedController {
 
     public void setLoggedUser(String login) {
         System.out.println("Przechwycono: " + login);
+        loggedUser = login;
     }
 }

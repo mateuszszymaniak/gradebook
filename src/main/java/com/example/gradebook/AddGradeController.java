@@ -23,9 +23,10 @@ public class AddGradeController {
     @FXML private Button cancelButton;
     @FXML private Label errorMsg;
     BidiMap<Integer, String> students = new TreeBidiMap<>();
+    private Integer loggerUserId;
+    private Integer studentIdValue;
+    private DBTransaction db = new DBTransaction();
     @FXML private void initialize(){
-        DBTransaction db = new DBTransaction();
-
         List<Student> downloadStudents = db.getStudents_byId(0);
 
         for (Student data : downloadStudents){
@@ -57,24 +58,24 @@ public class AddGradeController {
         DBTransaction db = new DBTransaction();
         String error = "";
         String gradeTypeValue = (String) gradeType.getValue();
-        String studentIdValue;
         String subjectValue = (String) subject.getValue();
         String gradeValue = grade.getText().trim();
         String commentValue = comment.getText().trim();
-        //String user =
 
         try {
-            studentIdValue = students.getKey(studentName.getValue()).toString();
+            studentIdValue = students.getKey(studentName.getValue());
         } catch (Exception e) {
+            System.out.println("Nie wybrano ucznia");
+        }
+
+        if (gradeTypeValue != null && subjectValue != null && !gradeValue.equals("") && studentIdValue != null) {
+            db.addGrade(Double.parseDouble(gradeValue), subjectValue, gradeTypeValue, commentValue, studentIdValue, loggerUserId);
+            System.out.println("ok");
+            errorMsg.setVisible(false);
+        } else if (studentIdValue == null){
             error += "Nie podano ucznia!\n";
             errorMsg.setText(error);
             errorMsg.setVisible(true);
-        }
-
-        if (gradeTypeValue != null && subjectValue != null && !gradeValue.equals("")) {
-            //db.addGrade(gradeValue, subjectValue, gradeTypeValue, commentValue, studentIdValue, );
-            System.out.println("ok");
-            errorMsg.setVisible(false);
         } else if(subjectValue == null){
             error += "Nie wybrano przedmiotu!\n";
             errorMsg.setText(error);
@@ -93,5 +94,9 @@ public class AddGradeController {
     public void onClickBtnCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void setLoggedUser(String login) {
+        loggerUserId = db.getUserId(login).get(0).getId();
     }
 }
