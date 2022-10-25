@@ -33,6 +33,8 @@ public class AddStudentController {
             db.addStudent(surname, name, studentGroup, schoolYear);
             errorMsg.setVisible(false);
 
+            closeWindow();
+
             Parent fxmlLoader = FXMLLoader.load(RegisterController.class.getResource("successAddStudent-view.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(fxmlLoader));
@@ -46,6 +48,9 @@ public class AddStudentController {
     }
 
     public void onClickBtnCancel(ActionEvent actionEvent) {
+        closeWindow();
+    }
+    public void closeWindow(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }

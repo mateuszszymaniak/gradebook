@@ -38,12 +38,10 @@ public class LoggedController {
     @FXML private Tab oceny;
     @FXML private Pane contentPane;
 
+
     @FXML private void initialize() {
         DBTransaction db = new DBTransaction();
-        //make fun with copilot send login between stages :)
-        //String login = contentPane.getChildren().toString();
-        //https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
-        //https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
+
         if (db.ifStudentExist() == false) {
             editStudent.setVisible(false);
             deleteStudent.setVisible(false);
@@ -73,8 +71,6 @@ public class LoggedController {
 
     public void onClickBtnAddStudent(ActionEvent actionEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(HelloController.class.getResource("addStudent-view.fxml"));
-
-
         Stage stage = new Stage();
         stage.setScene(new Scene(fxmlLoader));
         stage.initModality(Modality.WINDOW_MODAL);
@@ -94,5 +90,9 @@ public class LoggedController {
 
     public void onClickBtnDeleteStudent(ActionEvent actionEvent) {
         toDelete.setVisible(true);
+    }
+
+    public void setLoggedUser(String login) {
+        System.out.println("Przechwycono: " + login);
     }
 }

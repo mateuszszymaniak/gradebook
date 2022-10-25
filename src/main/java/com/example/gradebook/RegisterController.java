@@ -32,10 +32,12 @@ public class RegisterController {
             passwordText.setStyle("-fx-border-color: none;");
             passwordTextRepeated.setStyle("-fx-border-color: none;");
             errorMsg.setVisible(false);
-            db.registerUser(login, password);
+            db.registerUser(login, String.valueOf(password.hashCode()));
             loginText.setText("");
             passwordText.setText("");
             passwordTextRepeated.setText("");
+
+            closeWindow();
 
             Parent fxmlLoader = FXMLLoader.load(RegisterController.class.getResource("successRegister-view.fxml"));
             Stage stage = new Stage();
@@ -63,6 +65,9 @@ public class RegisterController {
     }
 
     public void onClickBtnCancel(ActionEvent actionEvent) {
+        closeWindow();
+    }
+    public void closeWindow(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
