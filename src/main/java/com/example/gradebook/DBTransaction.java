@@ -184,6 +184,7 @@ public class DBTransaction extends DB {
         }
         else {
             try {
+                deleteGrade_byStudentId(id);
                 String delete = "DELETE FROM `students` WHERE `id`=" + id;
                 statement.execute(delete);
             } catch (SQLException e) {
@@ -329,15 +330,40 @@ public class DBTransaction extends DB {
         }
     }
 
+    private boolean deleteGrade_byStudentId(int studentId) {
+        List<Grade> list = getGrades_byStudentId_force(studentId);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                String delete = "DELETE FROM `grades` WHERE `studentId`=" + studentId;
+                statement.execute(delete);
+            } catch (SQLException e) {
+                System.err.println("Error while deleting grade data: studentId-" + studentId);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     public List<Grade> getGrades_byId (int id) {
         return getGrades_mechanism("SELECT * FROM grades WHERE grades.id=" + id);
     }
 
-    public List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {
+    private List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {
         return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
                 "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
                 "WHERE grades.studentId=" + studentId + " AND students.schoolYear LIKE " + schoolYear);
     }
+
+    public List<Grade> getGrades_byStudentId_force (int studentId) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades WHERE grades.studentId=" + studentId);
+    }
+
 
     public List<Grade> getGrades_byUserId (int userId, String schoolYear) {
         return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
