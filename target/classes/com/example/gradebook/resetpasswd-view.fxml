@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.ResetPasswdController">
+    <children>
+        <Label layoutX="25.0" layoutY="51.0" text="Login" />
+        <Label layoutX="26.0" layoutY="86.0" text="Nowe hasło" />
+        <Label layoutX="26.0" layoutY="121.0" text="Powtórz hasło" />
+        <TextField fx:id="loginText" layoutX="113.0" layoutY="45.0" />
+        <PasswordField fx:id="passwordText" layoutX="113.0" layoutY="80.0" />
+        <PasswordField fx:id="repeatPasswordText" layoutX="113.0" layoutY="119.0" />
+        <Button fx:id="btnSave" layoutX="71.0" layoutY="160.0" mnemonicParsing="false" onAction="#onClickBtnSave" text="Zapisz" />
+        <Button fx:id="btnCancel" layoutX="138.0" layoutY="160.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Anuluj" />
+        <Label fx:id="errorMsg" disable="true" layoutX="25.0" layoutY="14.0" textFill="RED" visible="false" />
+    </children>
+</Pane>

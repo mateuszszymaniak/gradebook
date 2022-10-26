@@ -38,6 +38,26 @@ public class DBTransaction extends DB {
         return true;
     }
 
+    protected boolean reRegisterUser(String login, String password) {
+        if (signIn(login, password)) {
+            return false;
+        }
+        else {
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
+                        "users (`id`,`login`,`password`) VALUES (null,?,?)");
+                preparedStatement.setString(1, login);
+                preparedStatement.setString(2, password);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                System.err.println("Error while inserting user data: " + login);
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean signIn(String login, String password) {
         List<User> list = getUsers_mechanism("SELECT * FROM users WHERE login LIKE '" + login + "' AND password LIKE '" + password.hashCode() + "'");
         if(list.isEmpty()){
@@ -184,6 +204,7 @@ public class DBTransaction extends DB {
         }
         else {
             try {
+                deleteGrade_byStudentId(id);
                 String delete = "DELETE FROM `students` WHERE `id`=" + id;
                 statement.execute(delete);
             } catch (SQLException e) {
@@ -329,6 +350,25 @@ public class DBTransaction extends DB {
         }
     }
 
+    private boolean deleteGrade_byStudentId(int studentId) {
+        List<Grade> list = getGrades_byStudentId_force(studentId);
+        if (list.isEmpty()) {
+            System.err.println("Grade not found");
+            return false;
+        }
+        else {
+            try {
+                String delete = "DELETE FROM `grades` WHERE `studentId`=" + studentId;
+                statement.execute(delete);
+            } catch (SQLException e) {
+                System.err.println("Error while deleting grade data: studentId-" + studentId);
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+    }
+
     public List<Grade> getGrades_byId (int id) {
         return getGrades_mechanism("SELECT * FROM grades WHERE grades.id=" + id);
     }
@@ -338,6 +378,12 @@ public class DBTransaction extends DB {
                 "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
                 "WHERE grades.studentId=" + studentId + " AND students.schoolYear LIKE " + schoolYear);
     }
+
+    private List<Grade> getGrades_byStudentId_force (int studentId) {
+        return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
+                "grades.userId FROM grades WHERE grades.studentId=" + studentId);
+    }
+
 
     public List<Grade> getGrades_byUserId (int userId, String schoolYear) {
         return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
