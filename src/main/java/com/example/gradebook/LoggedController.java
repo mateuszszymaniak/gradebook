@@ -67,17 +67,17 @@ public class LoggedController {
         TableColumn<Student, String> rokSzkolny = new TableColumn<>("Rok szkolny");
 
 
-        if (db.ifStudentExist() == false) {
-            editStudent.setVisible(false);
-            deleteStudent.setVisible(false);
-            addGrade.setVisible(false);
-            editGrade.setVisible(false);
-            deleteGrade.setVisible(false);
-            table.setVisible(false);
-        } else if (db.ifGradeExist() == false) {
-            editGrade.setVisible(false);
-            deleteGrade.setVisible(false);
-        }
+//        if (db.ifStudentExist() == false) {
+//            editStudent.setVisible(false);
+//            deleteStudent.setVisible(false);
+//            addGrade.setVisible(false);
+//            editGrade.setVisible(false);
+//            deleteGrade.setVisible(false);
+//            table.setVisible(false);
+//        } else if (db.ifGradeExist() == false) {
+//            editGrade.setVisible(false);
+//            deleteGrade.setVisible(false);
+//        }
         action.setVisible(false);
 
         students = db.getStudents_byId(0);
