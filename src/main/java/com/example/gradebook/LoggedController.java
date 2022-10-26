@@ -54,6 +54,7 @@ public class LoggedController {
     private Parent root;
     private String loggedUser;
     private List<Student> students;
+    private String title = "";
 
     @FXML
     private void initialize() {
@@ -119,7 +120,7 @@ public class LoggedController {
     }
 
     public void onClickBtnEditStudent(ActionEvent actionEvent) {
-        String title = "Edytuj";
+        this.title = "Edytuj";
         table.getItems().clear();
         table.getColumns().clear();
         initialize();
@@ -129,7 +130,7 @@ public class LoggedController {
     }
 
     public void onClickBtnDeleteStudent(ActionEvent actionEvent) {
-        String title = "Usuń";
+        this.title = "Usuń";
         table.getItems().clear();
         table.getColumns().clear();
         initialize();
@@ -149,6 +150,18 @@ public class LoggedController {
     public void setLoggedUser(String login) {
         System.out.println("Przechwycono: " + login);
         loggedUser = login;
+    }
+
+    public void refreshGrid(ActionEvent actionEvent) {
+        switch (this.title){
+            case "Edytuj": onClickBtnEditStudent(actionEvent); break;
+            case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
+            default: {
+                table.getItems().clear();
+                table.getColumns().clear();
+                initialize();
+            }
+        }
     }
 
     private void addButtonToGrid(ActionEvent actionEvent, String title) {

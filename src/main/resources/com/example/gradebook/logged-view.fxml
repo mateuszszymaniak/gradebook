@@ -14,15 +14,16 @@
           <TableColumn fx:id="action" prefWidth="75.0" text="Akcja" visible="false" />
         --></columns>
       </TableView>
-      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="210.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="258.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Uczniowie">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="85.0" prefWidth="305.0">
                      <children>
-                        <Button fx:id="addStudent" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
-                        <Button fx:id="editStudent" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
-                        <Button fx:id="deleteStudent" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
+                         <Button fx:id="refresh" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshGrid" text="Odśwież" />
+                        <Button fx:id="addStudent" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
+                        <Button fx:id="editStudent" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
+                        <Button fx:id="deleteStudent" layoutX="201.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
                      </children>
                   </AnchorPane>
             </content>
