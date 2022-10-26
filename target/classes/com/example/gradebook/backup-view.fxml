@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="131.0" prefWidth="281.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.BackupController">
+    <children>
+        <Label layoutX="25.0" layoutY="51.0" text="Hasło kopii" />
+        <PasswordField fx:id="passwordText" layoutX="113.0" layoutY="45.0" />
+        <Button fx:id="btnCreate" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onAction="#onClickBtnCreate" text="Utwórz" />
+        <Button fx:id="btnRestore" layoutX="109.0" layoutY="87.0" mnemonicParsing="false" onAction="#onClickBtnRestore" text="Przywróć" />
+        <Button fx:id="btnCancel" layoutX="181.0" layoutY="87.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Anuluj" />
+        <Label fx:id="errorMsg" disable="true" layoutX="25.0" layoutY="14.0" textFill="RED" visible="false" />
+    </children>
+</Pane>

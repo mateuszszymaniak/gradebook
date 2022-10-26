@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="251.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.BackupController">
+    <Label layoutX="19.0" layoutY="43.0" text="Kopia zapasowa przywrócona pomyślnie" />
+    <Button fx:id="btnCancel" layoutX="110.0" layoutY="81.0" mnemonicParsing="false" onAction="#onClickBtnCancel" text="Ok" />
+</Pane>

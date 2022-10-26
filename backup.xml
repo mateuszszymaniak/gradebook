@@ -3,95 +3,24 @@
   <gradebook>
     <users>
       <user id="1">
-        <login>pTGMxNM1gLX4nLhAC474aQ==</login>
-        <password>rVtoqsrIutuRMC0XHBbqYA==</password>
-      </user>
-      <user id="2">
-        <login>SjBU8YId0lBUGlQps5BzYA==</login>
-        <password>xqvYFSLPSKHQxB8IgTGQng==</password>
+        <login>DHJKVBla0T95It+h+HeOhw==</login>
+        <password>f6YXYcy6gVUUyP9aQtkFuBxSAOrpmhaM</password>
       </user>
     </users>
     <students>
       <student id="1">
-        <surname>wH89rb4ef+TSAekQS6eXbtUpfsJw5wrO</surname>
-        <name>nwAgN2l0x7Fi1pA26ZEP+A==</name>
-        <studentGroup>IS+x2bdLa1SMS64Hy6nXwg==</studentGroup>
-        <schoolYear>Dq0laQOv6W80mE9fcAChgb2ePGUGOAfA</schoolYear>
+        <surname>mivu0/dEoSMIBqhjtgLN7z9Bp812hBLD</surname>
+        <name>xt9QOakV5SFV6kl3UltWEQ==</name>
+        <studentGroup>cnmTlGUpsSM2FSRhbllTEg==</studentGroup>
+        <schoolYear>kAAXU6x4vww0eYCCD1+bj7HkaAE0y/SL</schoolYear>
       </student>
       <student id="2">
-        <surname>ZkpOe5v71U6DCXFslDRTegBfA8wOe9f0</surname>
-        <name>dj0G8Xp5BoZij2O7YWGT+A==</name>
-        <studentGroup>+GjJZM/NSEweNU3Pc9r39g==</studentGroup>
-        <schoolYear>yatIJuCoVf7JzKokRwJbHb0yEnDR8AXm</schoolYear>
-      </student>
-      <student id="3">
-        <surname>fT0CpoMI7RI3ARerfppJLhY3vQDc/GP6</surname>
-        <name>OrfADnO8Z2besJfXTFrFbw==</name>
-        <studentGroup>eTyAcP9GlaVhwuhGpkN5xA==</studentGroup>
-        <schoolYear>FslPoYv0dX3ruBIdBuUjtk/ts8awAM/8</schoolYear>
-      </student>
-      <student id="4">
-        <surname>/MrC5SMLc3GsUA8olbDTrv/T7/+0k6OM</surname>
-        <name>F6lr3kXTBLysSEQUk7dUgw==</name>
-        <studentGroup>NBCI/f8jeoogbvop2hQbUg==</studentGroup>
-        <schoolYear>sWIGqRf9ulICJXdGrumh8Uu+c29snoyx</schoolYear>
-      </student>
-      <student id="5">
-        <surname>YRQhMLUXc4j5jukwxZhqxiMFtjgVcRin</surname>
-        <name>jmkiu7KB9r5uiLcXJXVQmg==</name>
-        <studentGroup>0pLxXza10ofoEvOdP8ZfSQ==</studentGroup>
-        <schoolYear>vONx3bn8bjJqoyUx34O3zLxSvqYybOJx</schoolYear>
+        <surname>FHE4Zg7fS5+o6Q6C6YRp9g==</surname>
+        <name>meQQLXI/bWQY6xn3xSO36Q==</name>
+        <studentGroup>Es1NqeSDYqnuFAjmIwExlA==</studentGroup>
+        <schoolYear>rzifpyN85u2a3Tz9BSCR0QpGFemWoWeN</schoolYear>
       </student>
     </students>
-    <grades>
-      <grade id="1">
-        <grade>IBNIJ6mzIrBUhIIC0nHtew==</grade>
-        <subject>dZn3XzgjI+1qBkuU8Jg3jQ==</subject>
-        <type>uUm77T3MOq240yAfNhd5Lw==</type>
-        <comment>6gLbMo4jRi5fE5ZMkkBFDA+9eOTtsdGl</comment>
-        <studentId>wUJk5AefNz3X1N4yNvKsug==</studentId>
-        <userId>wtUKj2k2Wcr4DpoxqwLq8Q==</userId>
-      </grade>
-      <grade id="2">
-        <grade>NI1iwRyXSig925S6wxaGcQ==</grade>
-        <subject>yxFMHhjXdXN5FTblRfpcWA==</subject>
-        <type>XN9iEckm85Y9DaFbeJcrXg==</type>
-        <comment>dpR1hdyjcAm7ZETuSK23oA==</comment>
-        <studentId>bzpnj4EvmlWMTpOef0fGdw==</studentId>
-        <userId>u3GV691wwlygF+iNfpJfjw==</userId>
-      </grade>
-      <grade id="3">
-        <grade>15I5pBGZoOY8ROexejEZzw==</grade>
-        <subject>m04h4F5++n1WRcIB/s6M/A==</subject>
-        <type>THgLnFKJcfjxnnldn7r0fg==</type>
-        <comment>///sqAW38qUe1q89M4ZGIg==</comment>
-        <studentId>BYitL2/Yl2OiXz53BsW4FA==</studentId>
-        <userId>/ePVaa8e5JTlMnhMmATAeA==</userId>
-      </grade>
-      <grade id="4">
-        <grade>Uemo/lLgVU2dO0eKMxKSPw==</grade>
-        <subject>OgibILkwaFlcCT4eLsP5oQ==</subject>
-        <type>TCEbI6QUZYSuKClmbzT+7g==</type>
-        <comment>xn69uRW/+SYFI9w8z8GsJQ==</comment>
-        <studentId>PIi0hKinHaZ1nBHQySnd5g==</studentId>
-        <userId>9TH/LyKkpOrKBKUV20aGBw==</userId>
-      </grade>
-      <grade id="5">
-        <grade>7lKzLgq8PC8p5TTBJjuC5g==</grade>
-        <subject>B8qfLwKc7zkwq+5L7fe+ZQ==</subject>
-        <type>diwkuslKBSHhpzpFCcSlVw==</type>
-        <comment>oDP448iG9nMsNJo+g+n+3A==</comment>
-        <studentId>9yeGj+35f1EgXEhs/kXzYw==</studentId>
-        <userId>jvnCyXyM/S025xEEZOhreA==</userId>
-      </grade>
-      <grade id="6">
-        <grade>L/jcMvfGggSP/TZ/vDTGzw==</grade>
-        <subject>7dm9n48hBhUM/mY6d6P48Q==</subject>
-        <type>5bgz4MKL9vgX3AVpOWDuhA==</type>
-        <comment>K3eZL1BjVmoBWN60sUcvCg==</comment>
-        <studentId>W9xYLhOvrKPp7OhO11jTew==</studentId>
-        <userId>5iYgmkQnGG/x1zx69Nk2Dg==</userId>
-      </grade>
-    </grades>
+    <grades />
   </gradebook>
 </xml>

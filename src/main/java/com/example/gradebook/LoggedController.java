@@ -147,6 +147,20 @@ public class LoggedController {
 
     }
 
+    public void onClickBtnBackup(ActionEvent actionEvent) {
+        Parent fxmlLoader = null;
+        try {
+            fxmlLoader = FXMLLoader.load(HelloController.class.getResource("backup-view.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setScene(new Scene(fxmlLoader));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+        stage.show();
+    }
+
     public void setLoggedUser(String login) {
         System.out.println("Przechwycono: " + login);
         loggedUser = login;

@@ -211,7 +211,7 @@ public class Backup extends DBTransaction{
             Element user = users.get(i);
             login = textEncryptor.decrypt(user.getChildText("login"));
             password = textEncryptor.decrypt(user.getChildText("password"));
-            if(!registerUser(login, password)) {
+            if(!reRegisterUser(login, password)) {
                 return false;
             }
         }

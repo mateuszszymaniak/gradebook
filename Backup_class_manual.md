@@ -8,6 +8,11 @@ bckp.createBackup("secretKey");    // crete backup from database to the .xml fil
 bckp.importBackup("secretKey");    // import backup to the database
 ```
 * `"secretKey"` is the encryption / decryption password
+> __WARNING:__ 
+>
+>If you enter a different secret key when restoring a backup than when it was created, the database will be restored with corrupted data.
+> 
+> In this case, under no circumstances should you make a copy of this data! Instead, restore the previous copy again with the correct password.
 ---
 ___NOTE:___
 1. Database backups are stored in _backup.xml_ file in main directory. [See example](backup.xml).

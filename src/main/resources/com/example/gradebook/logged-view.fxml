@@ -14,7 +14,7 @@
           <TableColumn fx:id="action" prefWidth="75.0" text="Akcja" visible="false" />
         --></columns>
       </TableView>
-      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="258.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="390.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Uczniowie">
             <content>
@@ -24,6 +24,7 @@
                         <Button fx:id="addStudent" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
                         <Button fx:id="editStudent" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
                         <Button fx:id="deleteStudent" layoutX="201.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
+                         <Button fx:id="backup" layoutX="258.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickBtnBackup" text="Kopia zapasowa" />
                      </children>
                   </AnchorPane>
             </content>
