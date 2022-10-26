@@ -51,6 +51,16 @@ public class HelloController {
         stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
         stage.show();
     }
+
+    public void onClickBtnResetPasswd(ActionEvent actionEvent) throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(HelloController.class.getResource("resetpasswd-view.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(fxmlLoader));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+        stage.show();
+    }
+
     public void loggedWindow(String login) throws IOException {
         //zamykanie okna NARESZCIE!!!!
         Stage stage = (Stage) btnLogin.getScene().getWindow();

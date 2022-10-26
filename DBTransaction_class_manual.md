@@ -36,7 +36,7 @@ tx.getStudents_byGroup("4c");   // return list of students by students' group
 tx.getStudents_bySchoolYear("2022/2023");   // return list of students by school year
 
 tx.editStudent(2,"Nowakowska", "Anna", "3e", "2022/2023");  // edit student in db; return true or false
-
+tx.deleteStudent(1);    // delete student by id with all his grades
 
 
 //Grade class
