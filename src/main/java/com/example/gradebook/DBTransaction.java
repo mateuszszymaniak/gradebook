@@ -373,13 +373,13 @@ public class DBTransaction extends DB {
         return getGrades_mechanism("SELECT * FROM grades WHERE grades.id=" + id);
     }
 
-    private List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {
+    public List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {
         return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
                 "grades.userId FROM grades INNER JOIN students ON grades.studentId = students.id " +
                 "WHERE grades.studentId=" + studentId + " AND students.schoolYear LIKE " + schoolYear);
     }
 
-    public List<Grade> getGrades_byStudentId_force (int studentId) {
+    private List<Grade> getGrades_byStudentId_force (int studentId) {
         return getGrades_mechanism("SELECT grades.id, grades.grade, grades.subject, grades.type, grades.comment, grades.studentId," +
                 "grades.userId FROM grades WHERE grades.studentId=" + studentId);
     }
