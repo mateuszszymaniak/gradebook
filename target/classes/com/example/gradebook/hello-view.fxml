@@ -11,7 +11,7 @@
       <PasswordField fx:id="passwordText" layoutX="84.0" layoutY="82.0" />
       <Button fx:id="btnLogin" layoutX="17.0" layoutY="127.0" mnemonicParsing="false" onAction="#onClickBtnLogin" text="Login" />
       <Button fx:id="btnRegister" layoutX="84.0" layoutY="127.0" mnemonicParsing="false" onAction="#onClickBtnRegister" text="Rejestracja" />
-      <Button fx:id="labelRemind" layoutX="178.0" layoutY="132.0" mnemonicParsing="false" onAction="#onClickBtnResetPasswd" text="Zresetuj hasło" />
+      <Button fx:id="labelRemind" layoutX="178.0" layoutY="127.0" mnemonicParsing="false" onAction="#onClickBtnResetPasswd" text="Zresetuj hasło" />
       <Label fx:id="errorMsg" disable="true" layoutX="25.0" layoutY="14.0" textFill="RED" visible="false" />
    </children>
 </Pane>
