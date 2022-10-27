@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.LoggedController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.LoggedController">
    <children>
       <TableView fx:id="studentTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
        <columns></columns>
       </TableView>
-      <TableView fx:id="gradeTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
+      <TableView fx:id="gradeTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="560.0">
         <columns></columns>
       </TableView>
       <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="196.0" tabClosingPolicy="UNAVAILABLE">
