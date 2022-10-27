@@ -7,29 +7,49 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditGradeController {
     @FXML
     private Button cancelButton;
     @FXML private TextField gradeText;
-    @FXML private TextField typeText;
-    @FXML private TextField subjectText;
+    @FXML private ChoiceBox typeText;
+    @FXML private ChoiceBox subjectText;
     @FXML private TextField commentText;
     @FXML private Label errorMsg;
     private int gradeId, studentId, userId;
 
     private DBTransaction db = new DBTransaction();
+    @FXML private void initialize(){
+        List<Grade> downloadedGrade = db.getGrades_byId(gradeId);
+        List<String> subjectList = new ArrayList<>();
+        subjectList.add("Matematyka");
+        subjectList.add("Język angielski");
+        subjectList.add("Informatyka");
+        for (String subName : subjectList){
+            subjectText.getItems().add(subName);
+        }
+
+        List<String> gradeTypeList = new ArrayList<>();
+        gradeTypeList.add("Sprawdzian");
+        gradeTypeList.add("Kartkówka");
+        gradeTypeList.add("Odpowiedź ustna");
+        for(String grade : gradeTypeList){
+            typeText.getItems().add(grade);
+        }
+    }
     public void onClickBtnEdit(ActionEvent actionEvent) throws IOException {
         String grade = gradeText.getText().trim();
-        String type = typeText.getText().trim();
-        String subject = subjectText.getText().trim();
+        String type = (String) typeText.getValue();
+        String subject = (String) subjectText.getValue();
         String comment = commentText.getText().trim();
 
         if(!grade.equals("") && !type.equals("") && !subject.equals("")){
@@ -66,8 +86,8 @@ public class EditGradeController {
         System.out.println(id);
         List<Grade> grade = db.getGrades_byId(id);
         gradeText.setText(Double.toString(grade.get(0).getGrade()));
-        typeText.setText(grade.get(0).getType());
-        subjectText.setText(grade.get(0).getSubject());
+        typeText.setValue(grade.get(0).getType());
+        subjectText.setValue(grade.get(0).getSubject());
         commentText.setText(grade.get(0).getComment());
         studentId = grade.get(0).getStudentId();
         userId = grade.get(0).getUserId();
