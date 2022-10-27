@@ -1,8 +1,11 @@
 package com.example.gradebook;
 
+import javafx.util.Pair;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -376,6 +379,31 @@ public class DBTransaction extends DB {
         else {
             return getGrades_mechanism("SELECT * FROM grades WHERE id=" + id);
         }
+    }
+
+    //  combined query
+    public List<Pair<Grade, Student>> getGrades_byId_withStudentName (int id) {
+        List<Grade> gradeList = new ArrayList<>();
+        List<Student> studentList = new ArrayList<>();
+        List<Pair<Grade, Student>> pairList = new ArrayList<>();
+
+        if (id==0){
+            gradeList = getGrades_mechanism("SELECT * FROM grades");
+            for (Grade grade : gradeList) {
+                Student student = getStudents_byId(grade.getStudentId()).get(0);
+                studentList.add(student);
+            }
+        }
+        else {
+            gradeList = getGrades_mechanism("SELECT * FROM grades WHERE id=" + id);
+            studentList = getStudents_byId(gradeList.get(0).getStudentId());
+        }
+
+        for (int i=0;i<gradeList.size();i++){
+            Pair<Grade, Student> pair = new Pair<>(gradeList.get(i), studentList.get(i));
+            pairList.add(pair);
+        }
+        return pairList;
     }
 
     public List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {

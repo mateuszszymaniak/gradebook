@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class LoggedController {
     private Button deleteGrade;
     @FXML
     private TableView<Student> studentTable;
-    @FXML TableView<Grade> gradeTable;
+    @FXML TableView<Pair<Grade, Student>> gradeTable;
     @FXML
     private TableColumn<Student, String> nazwisko;
     @FXML
@@ -61,6 +62,7 @@ public class LoggedController {
     private String loggedUser;
     private List<Student> students;
     private List<Grade> grades;
+    private  List<Pair<Grade, Student>> pairGradeStudent;
     private String title = "";
     private Tab studentTab;
     private Tab gradeTab;
@@ -120,93 +122,33 @@ public class LoggedController {
         gradeTable.getItems().clear();
         gradeTable.getColumns().clear();
 
-        TableColumn<Grade, String> fullname = new TableColumn<>("Uczeń");
-        TableColumn<Grade, String> subject = new TableColumn<>("Przedmiot");
-        TableColumn<Grade, String> type = new TableColumn<>("Rodzdaj oceny");
-        TableColumn<Grade, String> grade = new TableColumn<>("Ocena");
-        TableColumn<Grade, String> comment = new TableColumn<>("Komentarz");
+        TableColumn<Pair<Grade, Student>, String> surname = new TableColumn<>("Nazwisko");
+        TableColumn<Pair<Grade, Student>, String> name = new TableColumn<>("Imię");
+        TableColumn<Pair<Grade, Student>, String> subject = new TableColumn<>("Przedmiot");
+        TableColumn<Pair<Grade, Student>, String> type = new TableColumn<>("Rodzdaj oceny");
+        TableColumn<Pair<Grade, Student>, String> grade = new TableColumn<>("Ocena");
+        TableColumn<Pair<Grade, Student>, String> comment = new TableColumn<>("Komentarz");
 
         ObservableList<String> names = FXCollections.observableArrayList();
 
-        grades = db.getGrades_byId(0);
+        pairGradeStudent = db.getGrades_byId_withStudentName(0);
 
-        for(Grade grade1 : grades){
-            //names.clear();
-            names.add(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
-            //fullname.setCellValueFactory(data -> new SimpleStringProperty(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname()));
-            //gradeTable.setItems(FXCollections.observableArrayList(grades));
-            //System.out.println(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
-            //fullname.getColumns().add(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
-            //grade1.setFullname(db.getStudentName(grade1.getStudentId()));
-        }
-        System.out.println(names);
+        subject.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getKey().getSubject()));
+        type.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getKey().getType()));
+        grade.setCellValueFactory(param -> new SimpleStringProperty(Double.toString(param.getValue().getKey().getGrade())));
+        comment.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getKey().getComment()));
+        name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getValue().getName()));
+        surname.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getValue().getSurname()));
 
-        testAddNames(grades);
-
-        //chyba najprostrze rozwiązanie dodawania imienia i nazwiska ucznia do tabelki
-        //utworzyć w tabeli Grades nowe pole fullname, które będzie zawierało imię i nazwisko ucznia
-        //i jakoś to uzupełnić (pozapytaniem?)
-        //i wtedy można dane ucznia wyświetlić w tabelce odwolujac się do fullname
-        //
-        //po wprowadzeniu odpowiednich zmian poniższa linijka powinna prawidłowo działać :)
-        //fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
-        subject.setCellValueFactory(new PropertyValueFactory<>("subject"));
-        type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-        comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
-
-        gradeTable.getColumns().add(fullname);
+        gradeTable.getColumns().add(surname);
+        gradeTable.getColumns().add(name);
         gradeTable.getColumns().add(subject);
         gradeTable.getColumns().add(type);
         gradeTable.getColumns().add(grade);
         gradeTable.getColumns().add(comment);
 
-        gradeTable.getItems().addAll(grades);
+        gradeTable.getItems().addAll(pairGradeStudent);
 
-    }
-    public void testAddNames(List<Grade> grades){
-        TableColumn<Grade, Void> action2 = new TableColumn("Uczeń");
-
-        Callback<TableColumn<Grade, Void>, TableCell<Grade, Void>> cellFactory = new Callback<TableColumn<Grade, Void>, TableCell<Grade, Void>>() {
-            @Override
-            public TableCell<Grade, Void> call(final TableColumn<Grade, Void> param) {
-                final TableCell<Grade, Void> cell = new TableCell<Grade, Void>() {
-
-                    private final String btn = new String(title);
-
-                    {
-                        for(Grade grade1 : grades) {
-                            //names.clear();
-                            title = db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname();
-                            //btn.setText(title);
-                            System.out.println(title);
-                        }
-                        //Grade data = getTableView().getItems().get(getIndex());
-                        //System.out.println("*************** TEST ***************");
-                        //System.out.println(data);
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setText(null);
-                        } else {
-                            setText(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
-        action2.setCellFactory(cellFactory);
-
-        gradeTable.getColumns().add(action2);
-    }
-    public String studentFullname(int studentId){
-        System.out.println("-> " + studentId);
-        return "ok";
     }
 
     public void onClickBtnAddStudent(ActionEvent actionEvent) throws IOException {

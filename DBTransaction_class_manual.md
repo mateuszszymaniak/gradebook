@@ -45,6 +45,7 @@ tx.addGrade(5, "math", "exam", "", 2, 1);   // add grade to the db; return true 
 tx.editGrade(1, 4.5, "math", "exam", "corrected", 2, 1); // edit grade in db; return true or false
 tx.deleteGrade(2);  // delete grade by gradeId; return true or false
 tx.getGrades_byId(1);   // return list of grades by gradeId
+tx.getGrades_byId_withStudentName(1);   // return list of pairs grades and students by gradeId
 // WARNING: all below getGrades_ methods return results for specified school year (school year must be in format "0000/0000")
 tx.getGrades_byStudentId(1, "2022/2023");   // return list of grades by studentId
 tx.getGrades_byUserId(1, "2022/2023");   // return list of grades by userId
