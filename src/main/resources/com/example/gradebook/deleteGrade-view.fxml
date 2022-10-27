@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="104.0" prefWidth="229.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.DeleteGradeController">
+    <children>
+        <Label layoutX="39.0" layoutY="14.0" text="Czy napewno usunąć ocenę " />
+        <Label fx:id="name" alignment="CENTER" layoutX="-1.0" layoutY="32.0" prefHeight="17.0" prefWidth="229.0" text="Label" textAlignment="CENTER" />
+        <Button fx:id="btnYes" layoutX="24.0" layoutY="65.0" mnemonicParsing="false" onAction="#onClickBtnYes" prefHeight="25.0" prefWidth="46.0" text="Tak" />
+        <Button fx:id="btnNo" layoutX="157.0" layoutY="65.0" mnemonicParsing="false" onAction="#onClickBtnNo" prefHeight="25.0" prefWidth="46.0" text="Nie" />
+    </children>
+</Pane>

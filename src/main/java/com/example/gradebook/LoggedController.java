@@ -66,6 +66,7 @@ public class LoggedController {
     private String title = "";
     private Tab studentTab;
     private Tab gradeTab;
+    private String pressedTab = "student";
 
     DBTransaction db = new DBTransaction();
 
@@ -109,11 +110,13 @@ public class LoggedController {
     public void pressedGradesTab(Event event) {
         studentTable.setVisible(false);
         gradeTable.setVisible(true);
+        this.pressedTab = "grade";
         System.out.println("Grades tab pressed");
     }
     public void pressedStudentsTab(Event event) {
         gradeTable.setVisible(false);
         studentTable.setVisible(true);
+        this.pressedTab = "student";
         createGradeTable();
         System.out.println("Students tab pressed");
     }
@@ -182,7 +185,7 @@ public class LoggedController {
         initialize();
 
         action.setVisible(true);
-        addButtonToGrid(actionEvent, title);
+        addButtonToStudentGrid(actionEvent, title);
     }
 
     public void onClickBtnDeleteStudent(ActionEvent actionEvent) {
@@ -192,15 +195,27 @@ public class LoggedController {
         initialize();
 
         action.setVisible(true);
-        addButtonToGrid(actionEvent, title);
+        addButtonToStudentGrid(actionEvent, title);
     }
 
     public void onClickBtnEditGrade(ActionEvent actionEvent) {
+        this.title = "Edytuj";
+        gradeTable.getItems().clear();
+        gradeTable.getColumns().clear();
+        createGradeTable();
 
+        action.setVisible(true);
+        addButtonToGradeGrid(actionEvent, title);
     }
 
     public void onClickBtnDeleteGrade(ActionEvent actionEvent) {
+        this.title = "Usuń";
+        gradeTable.getItems().clear();
+        gradeTable.getColumns().clear();
+        createGradeTable();
 
+        action.setVisible(true);
+        addButtonToGradeGrid(actionEvent, title);
     }
 
     public void onClickBtnBackup(ActionEvent actionEvent) {
@@ -223,18 +238,35 @@ public class LoggedController {
     }
 
     public void refreshGrid(ActionEvent actionEvent) {
-        switch (this.title){
-            case "Edytuj": onClickBtnEditStudent(actionEvent); break;
-            case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
-            default: {
-                studentTable.getItems().clear();
-                studentTable.getColumns().clear();
-                initialize();
+        switch (this.pressedTab){
+            case "student": {
+                switch (this.title){
+                    case "Edytuj": onClickBtnEditStudent(actionEvent); break;
+                    case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
+                    default: {
+                        studentTable.getItems().clear();
+                        studentTable.getColumns().clear();
+                        initialize();
+                    }
+                }
+                break;
+            }
+            case "grade": {
+                switch (this.title){
+                    case "Edytuj": onClickBtnEditGrade(actionEvent); break;
+                    case "Usuń": onClickBtnDeleteGrade(actionEvent); break;
+                    default: {
+                        gradeTable.getItems().clear();
+                        gradeTable.getColumns().clear();
+                        createGradeTable();
+                    }
+                }
+                break;
             }
         }
     }
 
-    private void addButtonToGrid(ActionEvent actionEvent, String title) {
+    private void addButtonToStudentGrid(ActionEvent actionEvent, String title) {
         TableColumn<Student, Void> action2 = new TableColumn("Akcja");
 
         Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
@@ -301,5 +333,74 @@ public class LoggedController {
         action2.setCellFactory(cellFactory);
 
         studentTable.getColumns().add(action2);
+    }
+
+    private void addButtonToGradeGrid(ActionEvent actionEvent, String title) {
+        TableColumn<Pair<Grade, Student>, Void> action2 = new TableColumn("Akcja");
+
+        Callback<TableColumn<Pair<Grade, Student>, Void>, TableCell<Pair<Grade, Student>, Void>> cellFactory = new Callback<TableColumn<Pair<Grade, Student>, Void>, TableCell<Pair<Grade, Student>, Void>>() {
+            @Override
+            public TableCell<Pair<Grade, Student>, Void> call(final TableColumn<Pair<Grade, Student>, Void> param) {
+                final TableCell<Pair<Grade, Student>, Void> cell = new TableCell<Pair<Grade, Student>, Void>() {
+
+                    private final Button btn = new Button(title);
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Pair<Grade, Student> data = getTableView().getItems().get(getIndex());
+
+                            if (title == "Edytuj") {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editGrade-view.fxml"));
+                                try {
+                                    root = fxmlLoader.load();
+                                    EditGradeController editGradeController = fxmlLoader.getController();
+                                    editGradeController.editChosenGrade(data.getKey().getId());
+                                    System.out.println("Przekazano ocene: " + data.getKey().getGrade() + " studentId: " + data.getKey().getStudentId() + " id: " + data.getKey().getId());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                Scene scene = new Scene(root);
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+                                stage.show();
+                                System.out.println("selectedData: " + data.getKey().getId());
+                            } else {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("deleteGrade-view.fxml"));
+                                try {
+                                    root = fxmlLoader.load();
+                                    DeleteGradeController deleteGradeController = fxmlLoader.getController();
+                                    deleteGradeController.deleteGrade(data.getKey());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                Scene scene = new Scene(root);
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+                                stage.show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        action2.setCellFactory(cellFactory);
+
+        gradeTable.getColumns().add(action2);
     }
 }
