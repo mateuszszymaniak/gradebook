@@ -66,6 +66,7 @@ public class LoggedController {
     private String title = "";
     private Tab studentTab;
     private Tab gradeTab;
+    private String pressedTab = "student";
 
     DBTransaction db = new DBTransaction();
 
@@ -109,11 +110,13 @@ public class LoggedController {
     public void pressedGradesTab(Event event) {
         studentTable.setVisible(false);
         gradeTable.setVisible(true);
+        this.pressedTab = "grade";
         System.out.println("Grades tab pressed");
     }
     public void pressedStudentsTab(Event event) {
         gradeTable.setVisible(false);
         studentTable.setVisible(true);
+        this.pressedTab = "student";
         createGradeTable();
         System.out.println("Students tab pressed");
     }
@@ -223,13 +226,30 @@ public class LoggedController {
     }
 
     public void refreshGrid(ActionEvent actionEvent) {
-        switch (this.title){
-            case "Edytuj": onClickBtnEditStudent(actionEvent); break;
-            case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
-            default: {
-                studentTable.getItems().clear();
-                studentTable.getColumns().clear();
-                initialize();
+        switch (this.pressedTab){
+            case "student": {
+                switch (this.title){
+                    case "Edytuj": onClickBtnEditStudent(actionEvent); break;
+                    case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
+                    default: {
+                        studentTable.getItems().clear();
+                        studentTable.getColumns().clear();
+                        initialize();
+                    }
+                }
+                break;
+            }
+            case "grade": {
+                switch (this.title){
+                    case "Edytuj": onClickBtnEditStudent(actionEvent); break;
+                    case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
+                    default: {
+                        gradeTable.getItems().clear();
+                        gradeTable.getColumns().clear();
+                        createGradeTable();
+                    }
+                }
+                break;
             }
         }
     }
