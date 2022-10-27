@@ -370,7 +370,12 @@ public class DBTransaction extends DB {
     }
 
     public List<Grade> getGrades_byId (int id) {
-        return getGrades_mechanism("SELECT * FROM grades WHERE grades.id=" + id);
+        if (id==0){
+            return getGrades_mechanism("SELECT * FROM grades");
+        }
+        else {
+            return getGrades_mechanism("SELECT * FROM grades WHERE id=" + id);
+        }
     }
 
     public List<Grade> getGrades_byStudentId (int studentId, String schoolYear) {

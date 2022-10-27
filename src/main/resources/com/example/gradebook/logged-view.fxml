@@ -5,31 +5,26 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradebook.LoggedController">
    <children>
-      <TableView fx:id="table" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
-        <columns>
-          <!--<TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
-          <TableColumn fx:id="imie" prefWidth="75.0" text="Imię" />
-          <TableColumn fx:id="klasa" prefWidth="75.0" text="Klasa" />
-          <TableColumn fx:id="rokSzkolny" prefWidth="75.0" text="Rok szkolny" />
-          <TableColumn fx:id="action" prefWidth="75.0" text="Akcja" visible="false" />
-        --></columns>
+      <TableView fx:id="studentTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
+       <columns></columns>
       </TableView>
-      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="390.0" tabClosingPolicy="UNAVAILABLE">
+      <TableView fx:id="gradeTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="390.0">
+        <columns></columns>
+      </TableView>
+      <TabPane layoutX="16.0" layoutY="14.0" prefHeight="84.0" prefWidth="196.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Uczniowie">
+          <Tab fx:id="studentsTab" text="Uczniowie" onSelectionChanged="#pressedStudentsTab">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="85.0" prefWidth="305.0">
                      <children>
-                         <Button fx:id="refresh" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshGrid" text="Odśwież" />
-                        <Button fx:id="addStudent" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
-                        <Button fx:id="editStudent" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
-                        <Button fx:id="deleteStudent" layoutX="201.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
-                         <Button fx:id="backup" layoutX="258.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickBtnBackup" text="Kopia zapasowa" />
-                     </children>
+                        <Button fx:id="addStudent" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnAddStudent" text="Dodaj" />
+                        <Button fx:id="editStudent" layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnEditStudent" text="Edytuj" />
+                        <Button fx:id="deleteStudent" layoutX="143.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBtnDeleteStudent" text="Usuń" />
+                        </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Oceny">
+          <Tab fx:id="gradesTab" text="Oceny" onSelectionChanged="#pressedGradesTab">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -42,5 +37,8 @@
           </Tab>
         </tabs>
       </TabPane>
+       <Button fx:id="refresh" layoutX="223.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshGrid" text="Odśwież" />
+       <Button fx:id="backup" layoutX="223.0" layoutY="56.0" mnemonicParsing="false" onAction="#onClickBtnBackup" text="Kopia zapasowa" />
+
    </children>
 </Pane>

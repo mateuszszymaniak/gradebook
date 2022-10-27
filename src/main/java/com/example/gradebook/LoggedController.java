@@ -1,15 +1,20 @@
 package com.example.gradebook;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -34,7 +39,8 @@ public class LoggedController {
     @FXML
     private Button deleteGrade;
     @FXML
-    private TableView<Student> table;
+    private TableView<Student> studentTable;
+    @FXML TableView<Grade> gradeTable;
     @FXML
     private TableColumn<Student, String> nazwisko;
     @FXML
@@ -54,30 +60,34 @@ public class LoggedController {
     private Parent root;
     private String loggedUser;
     private List<Student> students;
+    private List<Grade> grades;
     private String title = "";
+    private Tab studentTab;
+    private Tab gradeTab;
+
+    DBTransaction db = new DBTransaction();
+
+
 
     @FXML
     private void initialize() {
-
-        DBTransaction db = new DBTransaction();
-
         TableColumn<Student, String> nazwisko = new TableColumn<>("Nazwisko");
         TableColumn<Student, String> imie = new TableColumn<>("Imię");
         TableColumn<Student, String> klasa = new TableColumn<>("Klasa");
         TableColumn<Student, String> rokSzkolny = new TableColumn<>("Rok szkolny");
 
 
-        if (db.ifStudentExist() == false) {
-            editStudent.setVisible(false);
-            deleteStudent.setVisible(false);
-            addGrade.setVisible(false);
-            editGrade.setVisible(false);
-            deleteGrade.setVisible(false);
-            table.setVisible(false);
-        } else if (db.ifGradeExist() == false) {
-            editGrade.setVisible(false);
-            deleteGrade.setVisible(false);
-        }
+//        if (db.ifStudentExist() == false) {
+//            editStudent.setVisible(false);
+//            deleteStudent.setVisible(false);
+//            addGrade.setVisible(false);
+//            editGrade.setVisible(false);
+//            deleteGrade.setVisible(false);
+//            table.setVisible(false);
+//        } else if (db.ifGradeExist() == false) {
+//            editGrade.setVisible(false);
+//            deleteGrade.setVisible(false);
+//        }
         action.setVisible(false);
 
         students = db.getStudents_byId(0);
@@ -86,14 +96,118 @@ public class LoggedController {
         klasa.setCellValueFactory(new PropertyValueFactory<>("studentGroup"));
         rokSzkolny.setCellValueFactory(new PropertyValueFactory<>("schoolYear"));
 
-        table.getColumns().add(nazwisko);
-        table.getColumns().add(imie);
-        table.getColumns().add(klasa);
-        table.getColumns().add(rokSzkolny);
+        studentTable.getColumns().add(nazwisko);
+        studentTable.getColumns().add(imie);
+        studentTable.getColumns().add(klasa);
+        studentTable.getColumns().add(rokSzkolny);
 
-        table.getItems().addAll(students);
+        studentTable.getItems().addAll(students);
+        gradeTable.setVisible(false);
+    }
+    public void pressedGradesTab(Event event) {
+        studentTable.setVisible(false);
+        gradeTable.setVisible(true);
+        System.out.println("Grades tab pressed");
+    }
+    public void pressedStudentsTab(Event event) {
+        gradeTable.setVisible(false);
+        studentTable.setVisible(true);
+        createGradeTable();
+        System.out.println("Students tab pressed");
     }
 
+    public void createGradeTable(){
+        gradeTable.getItems().clear();
+        gradeTable.getColumns().clear();
+
+        TableColumn<Grade, String> fullname = new TableColumn<>("Uczeń");
+        TableColumn<Grade, String> subject = new TableColumn<>("Przedmiot");
+        TableColumn<Grade, String> type = new TableColumn<>("Rodzdaj oceny");
+        TableColumn<Grade, String> grade = new TableColumn<>("Ocena");
+        TableColumn<Grade, String> comment = new TableColumn<>("Komentarz");
+
+        ObservableList<String> names = FXCollections.observableArrayList();
+
+        grades = db.getGrades_byId(0);
+
+        for(Grade grade1 : grades){
+            //names.clear();
+            names.add(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
+            //fullname.setCellValueFactory(data -> new SimpleStringProperty(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname()));
+            //gradeTable.setItems(FXCollections.observableArrayList(grades));
+            //System.out.println(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
+            //fullname.getColumns().add(db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname());
+            //grade1.setFullname(db.getStudentName(grade1.getStudentId()));
+        }
+        System.out.println(names);
+
+        testAddNames(grades);
+
+        //chyba najprostrze rozwiązanie dodawania imienia i nazwiska ucznia do tabelki
+        //utworzyć w tabeli Grades nowe pole fullname, które będzie zawierało imię i nazwisko ucznia
+        //i jakoś to uzupełnić (pozapytaniem?)
+        //i wtedy można dane ucznia wyświetlić w tabelce odwolujac się do fullname
+        //
+        //po wprowadzeniu odpowiednich zmian poniższa linijka powinna prawidłowo działać :)
+        //fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        subject.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
+
+        gradeTable.getColumns().add(fullname);
+        gradeTable.getColumns().add(subject);
+        gradeTable.getColumns().add(type);
+        gradeTable.getColumns().add(grade);
+        gradeTable.getColumns().add(comment);
+
+        gradeTable.getItems().addAll(grades);
+
+    }
+    public void testAddNames(List<Grade> grades){
+        TableColumn<Grade, Void> action2 = new TableColumn("Uczeń");
+
+        Callback<TableColumn<Grade, Void>, TableCell<Grade, Void>> cellFactory = new Callback<TableColumn<Grade, Void>, TableCell<Grade, Void>>() {
+            @Override
+            public TableCell<Grade, Void> call(final TableColumn<Grade, Void> param) {
+                final TableCell<Grade, Void> cell = new TableCell<Grade, Void>() {
+
+                    private final String btn = new String(title);
+
+                    {
+                        for(Grade grade1 : grades) {
+                            //names.clear();
+                            title = db.getStudents_byId(grade1.getStudentId()).get(0).getName() + " " + db.getStudents_byId(grade1.getStudentId()).get(0).getSurname();
+                            //btn.setText(title);
+                            System.out.println(title);
+                        }
+                        //Grade data = getTableView().getItems().get(getIndex());
+                        //System.out.println("*************** TEST ***************");
+                        //System.out.println(data);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        action2.setCellFactory(cellFactory);
+
+        gradeTable.getColumns().add(action2);
+    }
+    public String studentFullname(int studentId){
+        System.out.println("-> " + studentId);
+        return "ok";
+    }
 
     public void onClickBtnAddStudent(ActionEvent actionEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(HelloController.class.getResource("addStudent-view.fxml"));
@@ -121,8 +235,8 @@ public class LoggedController {
 
     public void onClickBtnEditStudent(ActionEvent actionEvent) {
         this.title = "Edytuj";
-        table.getItems().clear();
-        table.getColumns().clear();
+        studentTable.getItems().clear();
+        studentTable.getColumns().clear();
         initialize();
 
         action.setVisible(true);
@@ -131,8 +245,8 @@ public class LoggedController {
 
     public void onClickBtnDeleteStudent(ActionEvent actionEvent) {
         this.title = "Usuń";
-        table.getItems().clear();
-        table.getColumns().clear();
+        studentTable.getItems().clear();
+        studentTable.getColumns().clear();
         initialize();
 
         action.setVisible(true);
@@ -171,8 +285,8 @@ public class LoggedController {
             case "Edytuj": onClickBtnEditStudent(actionEvent); break;
             case "Usuń": onClickBtnDeleteStudent(actionEvent); break;
             default: {
-                table.getItems().clear();
-                table.getColumns().clear();
+                studentTable.getItems().clear();
+                studentTable.getColumns().clear();
                 initialize();
             }
         }
@@ -244,6 +358,6 @@ public class LoggedController {
 
         action2.setCellFactory(cellFactory);
 
-        table.getColumns().add(action2);
+        studentTable.getColumns().add(action2);
     }
 }
