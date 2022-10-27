@@ -57,6 +57,7 @@ public class LoggedController {
     private Pane contentPane;
     @FXML
     private Button cancelButton;
+    @FXML Button btnLogout;
     TableColumn<Student, String> action = new TableColumn<>("Akcja");
     private Parent root;
     private String loggedUser;
@@ -128,11 +129,9 @@ public class LoggedController {
         TableColumn<Pair<Grade, Student>, String> surname = new TableColumn<>("Nazwisko");
         TableColumn<Pair<Grade, Student>, String> name = new TableColumn<>("Imię");
         TableColumn<Pair<Grade, Student>, String> subject = new TableColumn<>("Przedmiot");
-        TableColumn<Pair<Grade, Student>, String> type = new TableColumn<>("Rodzdaj oceny");
+        TableColumn<Pair<Grade, Student>, String> type = new TableColumn<>("Rodzaj oceny");
         TableColumn<Pair<Grade, Student>, String> grade = new TableColumn<>("Ocena");
         TableColumn<Pair<Grade, Student>, String> comment = new TableColumn<>("Komentarz");
-
-        ObservableList<String> names = FXCollections.observableArrayList();
 
         pairGradeStudent = db.getGrades_byId_withStudentName(0);
 
@@ -402,5 +401,16 @@ public class LoggedController {
         action2.setCellFactory(cellFactory);
 
         gradeTable.getColumns().add(action2);
+    }
+
+    public void onClickBtnLogout(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) btnLogout.getScene().getWindow();
+        stage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Dziennik ocen");
+        stage.setScene(scene);
+        stage.show();
     }
 }

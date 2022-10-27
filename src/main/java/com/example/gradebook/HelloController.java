@@ -72,7 +72,7 @@ public class HelloController {
         LoggedController loggedController = fxmlLoader.getController();
         loggedController.setLoggedUser(login);
 
-        Scene scene = new Scene(root, 428, 373);
+        Scene scene = new Scene(root, 500, 373);
         Stage loggedWindow = new Stage();
         loggedWindow.setTitle("Dziennik " + login);
         loggedWindow.setScene(scene);
