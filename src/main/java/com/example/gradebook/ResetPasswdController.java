@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class ResetPasswdController {
     @FXML private Button btnCancel;
-    @FXML private Button btnSave;
     @FXML private TextField loginText;
     @FXML private TextField passwordText;
     @FXML private TextField repeatPasswordText;
@@ -51,7 +50,6 @@ public class ResetPasswdController {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
             stage.show();
-
         } else if (db.ifUserExist(login) == false){
             errors += "Podany użytkownik nie istnieje!\n";
             errorMsg.setText(errors);

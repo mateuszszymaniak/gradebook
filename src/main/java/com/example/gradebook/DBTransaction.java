@@ -11,16 +11,12 @@ import java.util.List;
 
 public class DBTransaction extends DB {
     public DBTransaction() {
-        /*
-        insertData("users", "usr1", "qwerty");
-        insertData("users", "usr2", "zaq1@WSX");
-         */
     }
-
 
     // ----------------------
     // User class
     // ----------------------
+
     public boolean registerUser(String login, String password) {
         if (signIn(login, password)) {
             return false;
@@ -44,8 +40,7 @@ public class DBTransaction extends DB {
     protected boolean reRegisterUser(String login, String password) {
         if (signIn(login, password)) {
             return false;
-        }
-        else {
+        } else {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
                         "users (`id`,`login`,`password`) VALUES (null,?,?)");
@@ -105,9 +100,7 @@ public class DBTransaction extends DB {
     private List<User> getUsers(int id) {
         if (id==0){
             return getUsers_mechanism("SELECT * FROM users");
-
-        }
-        else {
+        } else {
             return getUsers_mechanism("SELECT * FROM users WHERE id=" + id);
         }
     }
@@ -147,6 +140,7 @@ public class DBTransaction extends DB {
     // ----------------------
     // Student class
     // ----------------------
+
     public boolean addStudent(String surname, String name, String studentGroup, String schoolYear) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
@@ -168,8 +162,7 @@ public class DBTransaction extends DB {
         List<Student> list = getStudents_mechanism("SELECT * FROM students");
         if (list.isEmpty()) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -179,8 +172,7 @@ public class DBTransaction extends DB {
         if (list.isEmpty()) {
             System.err.println("Student not found");
             return false;
-        }
-        else {
+        } else {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `students` SET " +
                         "`surname`=?,`name`=?,`studentGroup`=?,`schoolYear`=? " +
@@ -204,8 +196,7 @@ public class DBTransaction extends DB {
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
-        }
-        else {
+        } else {
             try {
                 deleteGrade_byStudentId(id);
                 String delete = "DELETE FROM `students` WHERE `id`=" + id;
@@ -222,9 +213,7 @@ public class DBTransaction extends DB {
     public List<Student> getStudents_byId(int studentId) {
         if (studentId==0){
             return getStudents_mechanism("SELECT * FROM students");
-
-        }
-        else {
+        } else {
             return getStudents_mechanism("SELECT * FROM students WHERE id=" + studentId);
         }
     }
@@ -275,10 +264,10 @@ public class DBTransaction extends DB {
         return output;
     }
 
-
     // ----------------------
     // Grade class
     // ----------------------
+
     public boolean addGrade(double grade, String subject, String type, String comment, int studentId, int userId) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " +
@@ -302,8 +291,7 @@ public class DBTransaction extends DB {
         List<Grade> list = getGrades_mechanism("SELECT * FROM grades");
         if (list.isEmpty()) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -312,8 +300,7 @@ public class DBTransaction extends DB {
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
-        }
-        else {
+        } else {
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `grades` SET " +
                         "`grade`=?,`subject`=?,`type`=?,`comment`=?,`studentId`=?,`userId`=? " +
@@ -339,8 +326,7 @@ public class DBTransaction extends DB {
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
-        }
-        else {
+        } else {
             try {
                 String delete = "DELETE FROM `grades` WHERE `id`=" + id;
                 statement.execute(delete);
@@ -358,8 +344,7 @@ public class DBTransaction extends DB {
         if (list.isEmpty()) {
             System.err.println("Grade not found");
             return false;
-        }
-        else {
+        } else {
             try {
                 String delete = "DELETE FROM `grades` WHERE `studentId`=" + studentId;
                 statement.execute(delete);
@@ -375,8 +360,7 @@ public class DBTransaction extends DB {
     public List<Grade> getGrades_byId (int id) {
         if (id==0){
             return getGrades_mechanism("SELECT * FROM grades");
-        }
-        else {
+        } else {
             return getGrades_mechanism("SELECT * FROM grades WHERE id=" + id);
         }
     }
@@ -393,8 +377,7 @@ public class DBTransaction extends DB {
                 Student student = getStudents_byId(grade.getStudentId()).get(0);
                 studentList.add(student);
             }
-        }
-        else {
+        } else {
             gradeList = getGrades_mechanism("SELECT * FROM grades WHERE id=" + id);
             studentList = getStudents_byId(gradeList.get(0).getStudentId());
         }
@@ -461,7 +444,6 @@ public class DBTransaction extends DB {
         }
         return output;
     }
-
 
     // ----------------------
 
