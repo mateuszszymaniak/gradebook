@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegisterController {
-    @FXML private TextField  loginText;
+    @FXML private TextField loginText;
     @FXML private PasswordField passwordText;
     @FXML private PasswordField passwordTextRepeated;
     @FXML private Button closeButton;
@@ -72,10 +72,3 @@ public class RegisterController {
         stage.close();
     }
 }
-
-/*
-TODO
-1. Po poprawnej rejestracji wyskakujace okienko powinno zamknac tez formularz rejestracji
-2. Hashowanie hasla
-3. Regex (chociażby prosty)?
-*/

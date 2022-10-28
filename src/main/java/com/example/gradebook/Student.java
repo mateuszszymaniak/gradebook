@@ -1,7 +1,5 @@
 package com.example.gradebook;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.scene.control.CheckBox;
 import lombok.Getter;
 import lombok.Setter;
 

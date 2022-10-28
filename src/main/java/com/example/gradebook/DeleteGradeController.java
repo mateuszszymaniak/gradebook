@@ -8,12 +8,9 @@ import javafx.stage.Stage;
 
 public class DeleteGradeController {
     private int gradeId;
-    @FXML
-    Button btnYes;
+    @FXML Button btnYes;
     @FXML Button btnNo;
-    @FXML
-    Label name;
-
+    @FXML Label name;
     private DBTransaction db = new DBTransaction();
 
     public void onClickBtnYes(ActionEvent actionEvent) {
@@ -35,5 +32,4 @@ public class DeleteGradeController {
         name.setText(db.getGrades_byId_withStudentName(id).get(0).getValue().getName() + " " + db.getGrades_byId_withStudentName(id).get(0).getValue().getSurname() +
                 " " + db.getGrades_byId(id).get(0).getGrade() + " " + db.getGrades_byId(id).get(0).getSubject() + "?");
     }
-
 }

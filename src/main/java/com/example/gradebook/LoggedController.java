@@ -1,12 +1,6 @@
 package com.example.gradebook;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,56 +16,21 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
-
 import java.io.IOException;
 import java.util.List;
 
 public class LoggedController {
-    @FXML
-    private Button addStudent;
-    @FXML
-    private Button editStudent;
-    @FXML
-    private Button deleteStudent;
-    @FXML
-    private Button addGrade;
-    @FXML
-    private Button editGrade;
-    @FXML
-    private Button deleteGrade;
-    @FXML
-    private TableView<Student> studentTable;
+    @FXML private TableView<Student> studentTable;
     @FXML TableView<Pair<Grade, Student>> gradeTable;
-    @FXML
-    private TableColumn<Student, String> nazwisko;
-    @FXML
-    private TableColumn<Student, String> imie;
-    @FXML
-    private TableColumn<Student, String> klasa;
-    @FXML
-    private TableColumn<Student, String> rokSzkolny;
-    //@FXML private TableColumn<Student, Boolean> action;
-    @FXML
-    private Tab oceny;
-    @FXML
-    private Pane contentPane;
-    @FXML
-    private Button cancelButton;
     @FXML Button btnLogout;
     TableColumn<Student, String> action = new TableColumn<>("Akcja");
     private Parent root;
     private String loggedUser;
     private List<Student> students;
-    private List<Grade> grades;
     private  List<Pair<Grade, Student>> pairGradeStudent;
     private String title = "";
-    private Tab studentTab;
-    private Tab gradeTab;
     private String pressedTab = "student";
-
     DBTransaction db = new DBTransaction();
-
-
 
     @FXML
     private void initialize() {
@@ -80,18 +39,6 @@ public class LoggedController {
         TableColumn<Student, String> klasa = new TableColumn<>("Klasa");
         TableColumn<Student, String> rokSzkolny = new TableColumn<>("Rok szkolny");
 
-
-//        if (db.ifStudentExist() == false) {
-//            editStudent.setVisible(false);
-//            deleteStudent.setVisible(false);
-//            addGrade.setVisible(false);
-//            editGrade.setVisible(false);
-//            deleteGrade.setVisible(false);
-//            table.setVisible(false);
-//        } else if (db.ifGradeExist() == false) {
-//            editGrade.setVisible(false);
-//            deleteGrade.setVisible(false);
-//        }
         action.setVisible(false);
 
         students = db.getStudents_byId(0);
@@ -157,6 +104,7 @@ public class LoggedController {
         Parent fxmlLoader = FXMLLoader.load(HelloController.class.getResource("addStudent-view.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(fxmlLoader));
+        stage.setTitle("Dodawanie ucznia");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
         stage.show();
@@ -171,6 +119,7 @@ public class LoggedController {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Dodawanie oceny");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
         stage.show();
@@ -226,6 +175,7 @@ public class LoggedController {
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(fxmlLoader));
+        stage.setTitle("Kopia zapasowa");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
         stage.show();
@@ -267,14 +217,11 @@ public class LoggedController {
 
     private void addButtonToStudentGrid(ActionEvent actionEvent, String title) {
         TableColumn<Student, Void> action2 = new TableColumn("Akcja");
-
         Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
             @Override
             public TableCell<Student, Void> call(final TableColumn<Student, Void> param) {
                 final TableCell<Student, Void> cell = new TableCell<Student, Void>() {
-
                     private final Button btn = new Button(title);
-
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Student data = getTableView().getItems().get(getIndex());
@@ -292,6 +239,7 @@ public class LoggedController {
                                 Scene scene = new Scene(root);
                                 Stage stage = new Stage();
                                 stage.setScene(scene);
+                                stage.setTitle("Edycja ucznia");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
                                 stage.show();
@@ -308,13 +256,13 @@ public class LoggedController {
                                 Scene scene = new Scene(root);
                                 Stage stage = new Stage();
                                 stage.setScene(scene);
+                                stage.setTitle("Usunięcie ucznia");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
                                 stage.show();
                             }
                         });
                     }
-
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
@@ -336,14 +284,11 @@ public class LoggedController {
 
     private void addButtonToGradeGrid(ActionEvent actionEvent, String title) {
         TableColumn<Pair<Grade, Student>, Void> action2 = new TableColumn("Akcja");
-
         Callback<TableColumn<Pair<Grade, Student>, Void>, TableCell<Pair<Grade, Student>, Void>> cellFactory = new Callback<TableColumn<Pair<Grade, Student>, Void>, TableCell<Pair<Grade, Student>, Void>>() {
             @Override
             public TableCell<Pair<Grade, Student>, Void> call(final TableColumn<Pair<Grade, Student>, Void> param) {
                 final TableCell<Pair<Grade, Student>, Void> cell = new TableCell<Pair<Grade, Student>, Void>() {
-
                     private final Button btn = new Button(title);
-
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Pair<Grade, Student> data = getTableView().getItems().get(getIndex());
@@ -361,6 +306,7 @@ public class LoggedController {
                                 Scene scene = new Scene(root);
                                 Stage stage = new Stage();
                                 stage.setScene(scene);
+                                stage.setTitle("Edycja oceny");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
                                 stage.show();
@@ -377,13 +323,13 @@ public class LoggedController {
                                 Scene scene = new Scene(root);
                                 Stage stage = new Stage();
                                 stage.setScene(scene);
+                                stage.setTitle("Usuwanie oceny");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
                                 stage.show();
                             }
                         });
                     }
-
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);

@@ -1,6 +1,5 @@
 package com.example.gradebook;
 
-import javafx.util.Pair;
 import org.jasypt.util.text.StrongTextEncryptor;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
@@ -8,7 +7,6 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import java.io.*;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,8 +20,6 @@ public class Backup extends DBTransaction{
         this.students = getStudents_mechanism("SELECT * FROM students");
         this.grades = getGrades_mechanism("SELECT * FROM grades");
     }
-
-
 
     // ----------------------
     // Export backup
@@ -153,8 +149,6 @@ public class Backup extends DBTransaction{
         }
     }
 
-
-
     // ----------------------
     // Import backup
     // ----------------------
@@ -197,7 +191,6 @@ public class Backup extends DBTransaction{
         } catch (JDOMException | IOException e) {
             throw new RuntimeException(e);
         }
-
         return doc.getRootElement();
     }
 
