@@ -28,7 +28,7 @@ public class RegisterController {
         String login = loginText.getText().trim();
         String password = passwordText.getText().trim();
         String passwordRepeated = passwordTextRepeated.getText().trim();
-        if(!login.equals("") && password.equals(passwordRepeated) && db.ifUserExist(login) == false){
+        if(!login.equals("") && password.equals(passwordRepeated) && !password.equals("") && db.ifUserExist(login) == false){
             passwordText.setStyle("-fx-border-color: none;");
             passwordTextRepeated.setStyle("-fx-border-color: none;");
             errorMsg.setVisible(false);

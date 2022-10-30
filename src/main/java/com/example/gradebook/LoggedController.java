@@ -111,12 +111,14 @@ public class LoggedController {
     public void pressedGradesTab(Event event) {
         studentTable.setVisible(false);
         gradeTable.setVisible(true);
+        this.title = "";
         this.pressedTab = "grade";
         System.out.println("Grades tab pressed");
     }
     public void pressedStudentsTab(Event event) {
         gradeTable.setVisible(false);
         studentTable.setVisible(true);
+        this.title = "";
         this.pressedTab = "student";
         createGradeTable();
         System.out.println("Students tab pressed");
