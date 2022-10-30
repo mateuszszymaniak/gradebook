@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class EditStudentController {
-
     @FXML private Button cancelButton;
     @FXML private TextField surnameText;
     @FXML private TextField nameText;
@@ -24,7 +23,6 @@ public class EditStudentController {
     @FXML private TextField schoolYearText;
     @FXML private Label errorMsg;
     private int studentId;
-
     private DBTransaction db = new DBTransaction();
     public void onClickBtnEdit(ActionEvent actionEvent) throws IOException {
         String surname = surnameText.getText().trim();
@@ -71,5 +69,4 @@ public class EditStudentController {
         schoolYearText.setText(student.get(0).getSchoolYear());
         System.out.println(student.get(0).getSurname() + "|" + student.get(0).getName() + "|" + student.get(0).getStudentGroup() + "|" + student.get(0).getSchoolYear());
     }
-
 }

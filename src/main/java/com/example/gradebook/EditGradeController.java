@@ -18,18 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditGradeController {
-    @FXML
-    private Button cancelButton;
+    @FXML private Button cancelButton;
     @FXML private TextField gradeText;
     @FXML private ChoiceBox typeText;
     @FXML private ChoiceBox subjectText;
     @FXML private TextField commentText;
     @FXML private Label errorMsg;
     private int gradeId, studentId, userId;
-
     private DBTransaction db = new DBTransaction();
     @FXML private void initialize(){
-        List<Grade> downloadedGrade = db.getGrades_byId(gradeId);
         List<String> subjectList = new ArrayList<>();
         subjectList.add("Matematyka");
         subjectList.add("Język angielski");

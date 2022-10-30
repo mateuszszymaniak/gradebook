@@ -41,7 +41,6 @@ public class AddGradeController {
         for (String name : students.values()) {
             studentName.getItems().add(name);
         }
-        //studentName.getSelectionModel().select(0);
 
         List<String> subjectList = new ArrayList<>();
         subjectList.add("Matematyka");

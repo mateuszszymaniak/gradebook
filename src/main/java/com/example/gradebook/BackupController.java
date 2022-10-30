@@ -15,12 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BackupController {
-    @FXML
-    private Button btnCancel;
-    @FXML private Button btnCreate;
-    @FXML private Button btnRestore;
+    @FXML private Button btnCancel;
     @FXML private TextField passwordText;
-    @FXML private Label errorMsg;
 
     public void onClickBtnCreate(ActionEvent actionEvent){
         Backup bckp = new Backup();

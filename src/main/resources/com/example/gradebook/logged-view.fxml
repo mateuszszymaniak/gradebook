@@ -8,7 +8,7 @@
        <TableView fx:id="studentTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="339.0">
 
       </TableView>
-      <TableView fx:id="gradeTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="462.0">
+      <TableView fx:id="gradeTable" layoutX="16.0" layoutY="99.0" prefHeight="249.0" prefWidth="476.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
